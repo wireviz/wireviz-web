@@ -23,6 +23,8 @@ from flask import Blueprint, jsonify, make_response, request, send_file
 from flask_restplus import Api, Resource, reqparse
 from wireviz import wireviz
 
+from wireviz_web.plantuml import plantuml_decode
+
 file_upload = reqparse.RequestParser()
 file_upload.add_argument('yml_file',
                          type=werkzeug.datastructures.FileStorage,
@@ -89,7 +91,7 @@ class PNGRender(Resource):
             outputname = "%s%s" % (fon, '.png')
             resultfilename="%s%s" % ('png_rendered', '.png')
             mimetype='image/png'
-            wireviz.parse(plant_uml_decoder.plantuml_decode(encoded), file_out=fon)
+            wireviz.parse(plantuml_decode(encoded), file_out=fon)
             return send_file(outputname,
                                      as_attachment=True,
                                      attachment_filename=resultfilename,
@@ -117,7 +119,7 @@ class SVGRender(Resource):
             mimetype='image/svg+xml'
             print('/svg/<encoded>')
             print(resultfilename)
-            wireviz.parse(plant_uml_decoder.plantuml_decode(encoded), file_out=fon)
+            wireviz.parse(plantuml_decode(encoded), file_out=fon)
             return send_file(outputname,
                                      as_attachment=True,
                                      attachment_filename=resultfilename,
