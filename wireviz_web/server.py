@@ -15,15 +15,13 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-from flask import send_file
-from flask import request, jsonify, send_file, make_response
-from app import app, api
 import os
-from flask_restplus import Resource, reqparse
-import werkzeug
 import tempfile
+
+import werkzeug
+from flask import Blueprint, jsonify, make_response, request, send_file
+from flask_restplus import Api, Resource, reqparse
 from wireviz import wireviz
-from app import plant_uml_decoder
 
 file_upload = reqparse.RequestParser()
 file_upload.add_argument('yml_file',
@@ -31,8 +29,16 @@ file_upload.add_argument('yml_file',
                          location='files',
                          required=True,
                          help='YAML file')
-ns = api.namespace('', description='wireviz server')
-@ns.route('/render/')
+
+wireviz_blueprint = Blueprint('wireviz-web', __name__)
+api = Api(wireviz_blueprint, doc='/doc', version='0.0.0', title='WireViz-Web',
+          description='WireViz-Web is building on WireViz for easily documenting cables, '
+                      'wiring harnesses and connector pinouts.', )
+
+ns = api.namespace('', description='WireViz-Web REST API')
+
+
+@ns.route('/render')
 class Render(Resource):
     @api.expect(file_upload)
     @ns.produces(['image/png', 'image/svg+xml'])
@@ -68,6 +74,8 @@ class Render(Resource):
                 'message': 'internal error',
                 'exception': str(e)
             }), 500)
+
+
 @ns.route('/png/<encoded>')
 @ns.param('encoded', 'encoded script like plantuml uses')
 class PNGRender(Resource):
@@ -92,6 +100,7 @@ class PNGRender(Resource):
                 'message': 'internal error',
                 'exception': str(e)
             }), 500)
+
 
 @ns.route('/svg/<encoded>')
 @ns.param('encoded', 'encoded script like plantuml uses')
