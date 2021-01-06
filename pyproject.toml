@@ -61,7 +61,8 @@ classifiers = [
 python = "^3.6.1"
 wireviz = "^0.2"
 flask = "^1.1.2"
-flask-restplus = "^0.13.0"
+flask-restplus = "0.13.0"
+werkzeug = "0.16.1"
 
 [tool.poetry.dev-dependencies]
 
