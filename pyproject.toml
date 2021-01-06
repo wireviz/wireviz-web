@@ -1,0 +1,73 @@
+[tool.poetry]
+name = "wireviz-web"
+version = "0.0.0"
+description = "A wrapper around WireViz for bringing it to the web. Easily document cables and wiring harnesses."
+authors = [
+    "Jürgen Key <jkey@arcor.de>",
+    "Andreas Motl <andreas.motl@panodata.org>"
+]
+license = "AGPLv3"
+readme = "README.rst"
+include = [
+    "LICENSE",
+    "CHANGES.rst"
+]
+homepage = "https://github.com/daq-tools/wireviz-web"
+repository = "https://github.com/daq-tools/wireviz-web"
+
+keywords = [
+    "cable",
+    "connector",
+    "hardware",
+    "harness",
+    "wiring",
+    "wiring-diagram",
+    "wiring-harness"
+]
+classifiers = [
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "License :: OSI Approved :: GNU Affero General Public License v3",
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: System Administrators",
+    "Topic :: Communications",
+    "Topic :: Internet",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Scientific/Engineering :: Human Machine Interfaces",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Scientific/Engineering :: Interface Engine/Protocol Translator",
+    "Topic :: Scientific/Engineering :: Visualization",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Text Processing",
+    "Topic :: Utilities",
+    "Operating System :: POSIX",
+    "Operating System :: Unix",
+    "Operating System :: MacOS"
+]
+
+[tool.poetry.urls]
+"Issues" = "https://github.com/daq-tools/wireviz-web/issues"
+
+[tool.poetry.dependencies]
+python = "^3.6.1"
+wireviz = "^0.2"
+flask = "^1.1.2"
+flask-restplus = "^0.13.0"
+
+[tool.poetry.dev-dependencies]
+
+[tool.poetry.scripts]
+wireviz-web = 'wireviz_web.cli:run'
+
+[build-system]
+requires = ["poetry_core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
