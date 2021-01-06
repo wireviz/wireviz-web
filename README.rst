@@ -8,6 +8,8 @@ About
 *****
 A wrapper around the excellent WireViz_ by `Daniel Rojas`_ for bringing it to the web.
 Originally conceived within a `WireViz fork`_ by `Jürgen Key`_.
+For compatibility with PlantUML_, it includes an URL query parameter decoder
+by `Dyno Fu`_ and `Rudi Yardley`_.
 
 Thanks!
 
@@ -34,3 +36,6 @@ Look around, give it a test drive and submit patches.
 .. _Daniel Rojas: https://github.com/formatc1702
 .. _Jürgen Key: https://github.com/elbosso
 .. _GraphViz: https://www.graphviz.org/
+.. _PlantUML: https://plantuml.com/
+.. _Dyno Fu: https://github.com/dyno
+.. _Rudi Yardley: https://github.com/ryardley
