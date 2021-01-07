@@ -50,7 +50,7 @@ def plantuml_decode(plantuml_url):
     return dec.decompress(header + data).decode("utf-8")
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     original = "SyfFKj2rKt3CoKnELR1Io4ZDoSa700=="
     decoded = plantuml_decode(original)
     reencoded = plantuml_encode(decoded)
