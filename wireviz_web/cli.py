@@ -13,4 +13,4 @@ def run():
 
     # Invoke Flask application.
     # TODO: Parametrize listen address and debug mode.
-    app.run(host='127.0.0.1', port=3005, debug=True)
+    app.run(host="127.0.0.1", port=3005, debug=True)
