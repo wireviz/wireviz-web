@@ -32,7 +32,7 @@ jobs:
       - name: Setup Poetry
         uses: Gr1N/setup-poetry@v4
 
-      - name: Configure poetry
+      - name: Configure Poetry
         # https://github.com/northtree/poetry-github-actions/actions/runs/170795796/workflow
         run: |
           poetry config virtualenvs.in-project false
