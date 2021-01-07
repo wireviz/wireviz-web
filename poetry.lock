@@ -76,6 +76,17 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
 [[package]]
+name = "covdefaults"
+version = "1.2.0"
+description = "A coverage plugin to provide sensible default settings"
+category = "dev"
+optional = false
+python-versions = ">=3.6.1"
+
+[package.dependencies]
+coverage = ">=4.5"
+
+[[package]]
 name = "coverage"
 version = "5.3.1"
 description = "Code coverage measurement for Python"
@@ -490,7 +501,7 @@ testing = ["pytest (>=3.5,!=3.7.3)", "pytest-checkdocs (>=1.2.3)", "pytest-flake
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6.1"
-content-hash = "5a7127d05d7c1b3466bbc8ab41c40872ce4684074b046033deedd793ebfd04ed"
+content-hash = "e7aecf33fab0db0348578d658f00523c93615961cde79224b78d36cf801ea92c"
 
 [metadata.files]
 aniso8601 = [
@@ -520,6 +531,10 @@ click = [
 colorama = [
     {file = "colorama-0.4.4-py2.py3-none-any.whl", hash = "sha256:9f47eda37229f68eee03b24b9748937c7dc3868f906e8ba69fbcbdd3bc5dc3e2"},
     {file = "colorama-0.4.4.tar.gz", hash = "sha256:5941b2b48a20143d2267e95b1c2a7603ce057ee39fd88e7329b0c292aa16869b"},
+]
+covdefaults = [
+    {file = "covdefaults-1.2.0-py2.py3-none-any.whl", hash = "sha256:52fd96f92abb7f0d93f9d49692645ad11078301578b5fa460fcaed7f50e1d81a"},
+    {file = "covdefaults-1.2.0.tar.gz", hash = "sha256:5375f073048c958233e437a6c51328b9c42b9be5e2de5adf643343c04e68a2b4"},
 ]
 coverage = [
     {file = "coverage-5.3.1-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:fabeeb121735d47d8eab8671b6b031ce08514c86b7ad8f7d5490a7b6dcd6267d"},

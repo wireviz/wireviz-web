@@ -75,13 +75,14 @@ pytest = "^6.2.1"
 pytest-flask = "^1.1.0"
 filetype = "^1.0.7"
 pytest-cov = "^2.10.1"
+covdefaults = "^1.2.0"
 
 [tool.poetry.scripts]
 wireviz-web = "wireviz_web.cli:run"
 
 [tool.poe.tasks]
 test = "pytest tests -vvv"
-coverage = "pytest --cov=wireviz_web tests -vvv"
+coverage = "pytest --cov tests -vvv"
 style = [
     { cmd = "black .", help = "Run black on the code base" },
     { cmd = "isort .", help = "Run isort on the code base" },
@@ -97,7 +98,12 @@ style = [
 #""" }
 
 [tool.coverage.run]
+plugins = ["covdefaults"]
 omit = ["wireviz_web/cli.py"]
+
+[tool.coverage.report]
+fail_under = 90
+skip_covered = false
 
 [build-system]
 requires = ["poetry_core>=1.0.0"]

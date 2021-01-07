@@ -5,13 +5,13 @@ __appname__ = "wireviz-web"
 # Single-sourcing the package version
 # https://cjolowicz.github.io/posts/hypermodern-python-06-ci-cd/
 try:
-    from importlib.metadata import PackageNotFoundError, version  # noqa
-except ImportError:  # pragma: no cover
+    from importlib.metadata import PackageNotFoundError, version
+except ImportError:
     from importlib_metadata import PackageNotFoundError, version  # noqa
 
 try:
     __version__ = version(__name__)
-except PackageNotFoundError:  # pragma: no cover
+except PackageNotFoundError:
     __version__ = "unknown"
 
 
