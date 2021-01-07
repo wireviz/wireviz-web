@@ -36,7 +36,14 @@ endpoints for PlantUML.
 ********
 Synopsis
 ********
-::
+Setup::
+
+    pip install wireviz-web
+
+Invoke::
+
+    # Run server.
+    wireviz-web
 
     # Render a plain YAML file.
     echo "Bob -> Alice : hello" > test.yml
@@ -47,19 +54,35 @@ Synopsis
     http http://127.0.0.1:3005/svg/SyfFKj2rKt3CoKnELR1Io4ZDoSa700==
     http http://127.0.0.1:3005/png/SyfFKj2rKt3CoKnELR1Io4ZDoSa700==
 
+.. note::
+
+    The ``http`` command outlined above is HTTPie_.
+
+
+*****
+Tests
+*****
+Invoke tests, optionally with coverage report::
+
+    poe test
+    poe coverage
+
+
 
 ***********
 Development
 ***********
 As this project is still in its infancy, we humbly ask for support from the community.
-Look around, give it a test drive and submit patches.
+Look around, give it a test drive and submit patches. There are always things to do.
 
 
 .. _WireViz: https://github.com/formatc1702/WireViz
 .. _WireViz fork: https://github.com/elbosso/WireViz
-.. _Daniel Rojas: https://github.com/formatc1702
-.. _Jürgen Key: https://github.com/elbosso
 .. _GraphViz: https://www.graphviz.org/
 .. _PlantUML: https://plantuml.com/
+.. _HTTPie: https://httpie.io/
+
+.. _Daniel Rojas: https://github.com/formatc1702
+.. _Jürgen Key: https://github.com/elbosso
 .. _Dyno Fu: https://github.com/dyno
 .. _Rudi Yardley: https://github.com/ryardley
