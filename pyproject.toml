@@ -62,8 +62,7 @@ classifiers = [
 python = "^3.6.1"
 wireviz = "^0.2"
 flask = "^1.1.2"
-flask-restplus = "0.13.0"
-werkzeug = "0.16.1"
+flask-restx = "^0.2.0"
 
 # Conditionally installed for backward compatibility with older Python versions
 importlib_metadata              = { version = "^3.3.0", python = "<3.8" }

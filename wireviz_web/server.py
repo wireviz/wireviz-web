@@ -20,7 +20,7 @@ import tempfile
 
 import werkzeug
 from flask import Blueprint, jsonify, make_response, request, send_file
-from flask_restplus import Api, Resource, reqparse
+from flask_restx import Api, Resource, reqparse
 from wireviz import wireviz
 
 from wireviz_web import __version__
