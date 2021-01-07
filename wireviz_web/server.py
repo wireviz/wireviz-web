@@ -23,6 +23,7 @@ from flask import Blueprint, jsonify, make_response, request, send_file
 from flask_restplus import Api, Resource, reqparse
 from wireviz import wireviz
 
+from wireviz_web import __version__
 from wireviz_web.plantuml import plantuml_decode
 
 file_upload = reqparse.RequestParser()
@@ -38,10 +39,10 @@ wireviz_blueprint = Blueprint("wireviz-web", __name__)
 api = Api(
     wireviz_blueprint,
     doc="/doc",
-    version="0.0.0",
+    version=__version__,
     title="WireViz-Web",
-    description="WireViz-Web is building on WireViz for easily documenting cables, "
-    "wiring harnesses and connector pinouts.",
+    description="A wrapper around WireViz for bringing it to the web. "
+    "Easily document cables and wiring harnesses.",
 )
 
 ns = api.namespace("", description="WireViz-Web REST API")
