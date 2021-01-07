@@ -1,0 +1,52 @@
+name: Tests
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  tests:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest ] # , macos-latest, windows-latest ]
+        python-version: [ "3.6", "3.7", "3.8", "3.9" ]
+    env:
+      OS: ${{ matrix.os }}
+      PYTHON: ${{ matrix.python-version }}
+    name: Python ${{ matrix.python-version }} on OS ${{ matrix.os }}
+    steps:
+
+      - name: Acquire sources
+        uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+          architecture: x64
+
+      - name: Setup Graphviz
+        uses: ts-graphviz/setup-graphviz@v1
+
+      - name: Setup Poetry
+        uses: Gr1N/setup-poetry@v4
+
+      - name: Configure poetry
+        # https://github.com/northtree/poetry-github-actions/actions/runs/170795796/workflow
+        run: |
+          poetry config virtualenvs.in-project false
+          poetry config virtualenvs.path ~/.poetry/venv
+          poetry config cache-dir ~/.poetry
+
+      - name: Apply caching of dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.poetry
+          key: ${{ matrix.os }}-${{ matrix.python-version }}-poetry-${{ hashFiles('poetry.lock') }}
+
+      - name: Install program
+        run: poetry install
+
+      - name: Run tests
+        run: poetry run poe test
