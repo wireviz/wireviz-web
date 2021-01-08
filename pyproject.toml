@@ -66,6 +66,7 @@ flask-restx = "^0.2.0"
 
 # Conditionally installed for backward compatibility with older Python versions
 importlib_metadata              = { version = "^3.3.0", python = "<3.8" }
+click = "^7.1.2"
 
 [tool.poetry.dev-dependencies]
 poethepoet = "^0.9.0"
@@ -99,7 +100,6 @@ style = [
 
 [tool.coverage.run]
 plugins = ["covdefaults"]
-omit = ["wireviz_web/cli.py"]
 
 [tool.coverage.report]
 fail_under = 90
