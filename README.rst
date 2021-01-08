@@ -2,24 +2,27 @@
 WireViz-Web
 ###########
 
+.. image:: https://img.shields.io/pypi/pyversions/wireviz-web.svg
+    :target: https://pypi.org/project/wireviz-web/
+.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+   :target: https://github.com/psf/black
+.. image:: https://img.shields.io/pypi/status/wireviz-web.svg
+    :target: https://pypi.org/project/wireviz-web/
+.. image:: https://img.shields.io/github/license/daq-tools/wireviz-web
+   :target: https://github.com/daq-tools/wireviz-web/blob/main/LICENSE
+
 .. image:: https://github.com/daq-tools/wireviz-web/workflows/Tests/badge.svg
    :target: https://github.com/daq-tools/wireviz-web/actions?workflow=Tests
 .. image:: https://codecov.io/gh/daq-tools/wireviz-web/branch/main/graph/badge.svg
    :target: https://codecov.io/gh/daq-tools/wireviz-web
 
-.. image:: https://img.shields.io/pypi/pyversions/wireviz-web.svg
-    :target: https://pypi.org/project/wireviz-web/
 .. image:: https://img.shields.io/pypi/v/wireviz-web.svg
     :target: https://pypi.org/project/wireviz-web/
 .. image:: https://img.shields.io/github/v/tag/daq-tools/wireviz-web.svg
     :target: https://github.com/daq-tools/wireviz-web
-.. image:: https://img.shields.io/pypi/status/wireviz-web.svg
-    :target: https://pypi.org/project/wireviz-web/
 .. image:: https://img.shields.io/pypi/dm/wireviz-web.svg
     :target: https://pypi.org/project/wireviz-web/
 
-.. image:: https://img.shields.io/github/license/daq-tools/wireviz-web
-   :target: https://github.com/daq-tools/wireviz-web/blob/main/LICENSE
 
 
 *****
