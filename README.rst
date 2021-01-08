@@ -2,6 +2,25 @@
 WireViz-Web
 ###########
 
+.. image:: https://github.com/daq-tools/wireviz-web/workflows/Tests/badge.svg
+   :target: https://github.com/daq-tools/wireviz-web/actions?workflow=Tests
+.. image:: https://codecov.io/gh/daq-tools/wireviz-web/branch/main/graph/badge.svg
+   :target: https://codecov.io/gh/daq-tools/wireviz-web
+
+.. image:: https://img.shields.io/pypi/pyversions/wireviz-web.svg
+    :target: https://pypi.org/project/wireviz-web/
+.. image:: https://img.shields.io/pypi/v/wireviz-web.svg
+    :target: https://pypi.org/project/wireviz-web/
+.. image:: https://img.shields.io/github/v/tag/daq-tools/wireviz-web.svg
+    :target: https://github.com/daq-tools/wireviz-web
+.. image:: https://img.shields.io/pypi/status/wireviz-web.svg
+    :target: https://pypi.org/project/wireviz-web/
+.. image:: https://img.shields.io/pypi/dm/wireviz-web.svg
+    :target: https://pypi.org/project/wireviz-web/
+
+.. image:: https://img.shields.io/github/license/daq-tools/wireviz-web
+   :target: https://github.com/daq-tools/wireviz-web/blob/main/LICENSE
+
 
 *****
 About
@@ -47,16 +66,18 @@ Invoke::
 
     # Render a plain YAML file.
     echo "Bob -> Alice : hello" > test.yml
-    http --form http://127.0.0.1:3005/render yml_file@test.yml Accept:image/svg+xml
-    http --form http://127.0.0.1:3005/render yml_file@test.yml Accept:image/png
+    http --form http://localhost:3005/render yml_file@test.yml Accept:image/svg+xml
+    http --form http://localhost:3005/render yml_file@test.yml Accept:image/png
 
     # Render a PlantUML request.
-    http http://127.0.0.1:3005/svg/SyfFKj2rKt3CoKnELR1Io4ZDoSa700==
-    http http://127.0.0.1:3005/png/SyfFKj2rKt3CoKnELR1Io4ZDoSa700==
+    http http://localhost:3005/svg/SyfFKj2rKt3CoKnELR1Io4ZDoSa700==
+    http http://localhost:3005/png/SyfFKj2rKt3CoKnELR1Io4ZDoSa700==
 
 .. note::
 
     The ``http`` command outlined above is HTTPie_.
+
+For visiting the Swagger OpenAPI spec, go to http://localhost:3005/doc.
 
 
 *****

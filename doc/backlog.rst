@@ -22,12 +22,13 @@ Iteration 2
   - https://github.com/noirbizarre/flask-restplus/issues/758
   - https://github.com/noirbizarre/flask-restplus/issues/777
   - Reason: ``The import 'werkzeug.cached_property' is deprecated and will be removed in Werkzeug 1.0.``
-- [o] Add parametrization to ``cli.py`` using click
-- [o] Add badges to README
+- [x] Add parametrization to ``cli.py`` using click
+- [x] Add badges to README
 - [o] Release version 0.1.0
 
 Iteration 3
 ===========
+- [o] Adjust HTTP entrypoints
 - [o] Adjust REST responses
 
   - 404 should respond with JSON
