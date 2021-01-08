@@ -1,0 +1,55 @@
+name: Coverage
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Acquire sources
+        uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+          architecture: x64
+
+      - name: Setup Graphviz
+        uses: ts-graphviz/setup-graphviz@v1
+
+      - name: Setup Poetry
+        uses: Gr1N/setup-poetry@v4
+
+      - name: Configure Poetry
+        # https://github.com/northtree/poetry-github-actions/actions/runs/170795796/workflow
+        run: |
+          poetry config virtualenvs.in-project false
+          poetry config virtualenvs.path ~/.poetry/venv
+          poetry config cache-dir ~/.poetry
+
+      - name: Apply caching of dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.poetry
+          key: ${{ matrix.os }}-${{ matrix.python-version }}-poetry-${{ hashFiles('poetry.lock') }}
+
+      - name: Install program
+        run: poetry install
+
+      - name: Generate coverage report
+        run: |
+          poetry run poe coverage
+          poetry run coverage xml
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          file: ./coverage.xml
+          flags: unittests
+          env_vars: OS,PYTHON
+          name: codecov-umbrella
+          fail_ci_if_error: false
