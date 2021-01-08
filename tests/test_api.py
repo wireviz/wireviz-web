@@ -41,16 +41,26 @@ class TestRenderRegular:
             url_for("wireviz-web._render"),
             data=self.data_valid,
         )
-        assert response.status_code == 500
+        assert response.status_code == 406
         assert response.json == {
-            "exception": "'HTTP_ACCEPT'",
-            "message": "internal error",
+            "message": "Output type not acceptable: None",
+        }
+
+    def test_error_empty_accept(self, client):
+        response = client.post(
+            url_for("wireviz-web._render"),
+            data=self.data_valid,
+            headers={"Accept": ""},
+        )
+        assert response.status_code == 406
+        assert response.json == {
+            "message": "Output type not acceptable: ",
         }
 
     def test_error_no_data(self, client):
         response = client.post(
             url_for("wireviz-web._render"),
-            headers={"Accept": ""},
+            headers={"Accept": "image/svg+xml"},
         )
         assert response.status_code == 400
         assert response.json == {
@@ -64,12 +74,11 @@ class TestRenderRegular:
         response = client.post(
             url_for("wireviz-web._render"),
             data=self.data_invalid,
-            headers={"Accept": ""},
+            headers={"Accept": "image/svg+xml"},
         )
-        assert response.status_code == 500
+        assert response.status_code == 400
         assert response.json == {
-            "exception": "'str' object does not support item assignment",
-            "message": "internal error",
+            "message": "Unable to parse WireViz YAML format: 'str' object does not support item assignment",
         }
 
 
@@ -99,14 +108,22 @@ class TestRenderPlantUML:
         assert response.status_code == 404
         assert b"<title>404 Not Found" in response.data
 
-    def test_svg_invalid_data(self, client):
+    def test_svg_invalid_raw_data(self, client):
+        response = client.get(
+            url_for("wireviz-web._svg_render", encoded="foobar"),
+        )
+        assert response.status_code == 400
+        assert response.json == {
+            "message": "Unable to parse PlantUML request format: Incorrect padding",
+        }
+
+    def test_svg_invalid_encoded_data(self, client):
         response = client.get(
             url_for("wireviz-web._svg_render", encoded=self.data_invalid),
         )
-        assert response.status_code == 500
+        assert response.status_code == 400
         assert response.json == {
-            "exception": "'str' object does not support item assignment",
-            "message": "internal error",
+            "message": "Unable to parse WireViz YAML format: 'str' object does not support item assignment",
         }
 
     def test_png_success(self, client):
@@ -123,13 +140,20 @@ class TestRenderPlantUML:
         assert response.status_code == 404
         assert b"<title>404 Not Found" in response.data
 
-    def test_png_invalid_data(self, client):
+    def test_png_invalid_raw_data(self, client):
+        response = client.get(
+            url_for("wireviz-web._png_render", encoded="foobar"),
+        )
+        assert response.status_code == 400
+        assert response.json == {
+            "message": "Unable to parse PlantUML request format: Incorrect padding",
+        }
+
+    def test_png_invalid_encoded_data(self, client):
         response = client.get(
             url_for("wireviz-web._png_render", encoded=self.data_invalid),
         )
-        assert response.status_code == 500
+        assert response.status_code == 400
         assert response.json == {
-            "exception": "'str' object does not support item assignment",
-            "message": "internal error",
+            "message": "Unable to parse WireViz YAML format: 'str' object does not support item assignment",
         }
-

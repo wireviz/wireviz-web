@@ -1,6 +1,7 @@
 # A wrapper around WireViz for bringing it to the web. Easily document cables and wiring harnesses.
 #
 # Copyright (C) 2020  Jürgen Key <jkey@arcor.de>
+# Copyright (C) 2021  Andreas Motl <andreas.motl@panodata.org>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -15,16 +16,14 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-import os
-import tempfile
+from pathlib import PurePath
 
 import werkzeug
-from flask import Blueprint, jsonify, make_response, request, send_file
+from flask import Blueprint, request
 from flask_restx import Api, Resource, reqparse
-from wireviz import wireviz
 
 from wireviz_web import __version__
-from wireviz_web.plantuml import plantuml_decode
+from wireviz_web.core import decode_plantuml, mimetype_to_type, send_image
 
 file_upload = reqparse.RequestParser()
 file_upload.add_argument(
@@ -51,41 +50,27 @@ ns = api.namespace("", description="WireViz-Web REST API")
 @ns.route("/render")
 class Render(Resource):
     @api.expect(file_upload)
-    @ns.produces(["image/png", "image/svg+xml"])
+    @ns.produces(["image/svg+xml", "image/png"])
     def post(self):
         """"""
+
+        mimetype = request.headers.get("accept")
+
         args = file_upload.parse_args()
-        try:
-            file_temp = tempfile.TemporaryFile()
-            args["yml_file"].save(file_temp)
-            filename = os.path.splitext(
-                os.path.basename(os.path.normpath(args["yml_file"].filename))
-            )[0]
-            print(filename)
-            file_temp.seek(0)
-            yaml_input = file_temp.read().decode()
-            file_out = tempfile.NamedTemporaryFile()
-            fon = "%s%s" % (file_out.name, ".png")
-            outputname = "%s%s" % (fon, ".png")
-            resultfilename = "%s%s" % (filename, ".png")
-            mimetype = "image/png"
-            if request.headers["accept"] == "image/svg+xml":
-                fon = "%s%s" % (file_out.name, ".svg")
-                outputname = "%s%s" % (fon, ".svg")
-                mimetype = "image/svg+xml"
-                resultfilename = "%s%s" % (filename, ".svg")
-            wireviz.parse(yaml_input, file_out=fon)
-            return send_file(
-                outputname,
-                as_attachment=True,
-                attachment_filename=resultfilename,
-                mimetype=mimetype,
-            )
-        except Exception as e:
-            print(e)
-            return make_response(
-                jsonify({"message": "internal error", "exception": str(e)}), 500
-            )
+        yaml_input = args["yml_file"].read()
+
+        input_filename = args["yml_file"].filename
+        output_filename = (
+            PurePath(PurePath(input_filename).stem)
+            .with_suffix("." + mimetype_to_type(mimetype))
+            .name
+        )
+
+        return send_image(
+            input_yaml=yaml_input,
+            output_mimetype=mimetype,
+            output_filename=output_filename,
+        )
 
 
 @ns.route("/png/<encoded>")
@@ -94,24 +79,12 @@ class PNGRender(Resource):
     @ns.produces(["image/png"])
     def get(self, encoded):
         """"""
-        try:
-            file_out = tempfile.NamedTemporaryFile()
-            fon = "%s%s" % (file_out.name, ".png")
-            outputname = "%s%s" % (fon, ".png")
-            resultfilename = "%s%s" % ("png_rendered", ".png")
-            mimetype = "image/png"
-            wireviz.parse(plantuml_decode(encoded), file_out=fon)
-            return send_file(
-                outputname,
-                as_attachment=True,
-                attachment_filename=resultfilename,
-                mimetype=mimetype,
-            )
-        except Exception as e:
-            print(e)
-            return make_response(
-                jsonify({"message": "internal error", "exception": str(e)}), 500
-            )
+        yaml_input = decode_plantuml(input_plantuml=encoded)
+        return send_image(
+            input_yaml=yaml_input,
+            output_mimetype="image/png",
+            output_filename="png_rendered.svg",
+        )
 
 
 @ns.route("/svg/<encoded>")
@@ -120,23 +93,9 @@ class SVGRender(Resource):
     @ns.produces(["image/sgv+xml"])
     def get(self, encoded):
         """"""
-        try:
-            file_out = tempfile.NamedTemporaryFile()
-            fon = "%s%s" % (file_out.name, ".svg")
-            outputname = "%s%s" % (fon, ".svg")
-            resultfilename = "%s%s" % ("svg_rendered", ".svg")
-            mimetype = "image/svg+xml"
-            print("/svg/<encoded>")
-            print(resultfilename)
-            wireviz.parse(plantuml_decode(encoded), file_out=fon)
-            return send_file(
-                outputname,
-                as_attachment=True,
-                attachment_filename=resultfilename,
-                mimetype=mimetype,
-            )
-        except Exception as e:
-            print(e)
-            return make_response(
-                jsonify({"message": "internal error", "exception": str(e)}), 500
-            )
+        yaml_input = decode_plantuml(input_plantuml=encoded)
+        return send_image(
+            input_yaml=yaml_input,
+            output_mimetype="image/svg+xml",
+            output_filename="svg_rendered.svg",
+        )
