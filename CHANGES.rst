@@ -9,6 +9,8 @@ in progress
 - Add software tests
 - Add CI with GitHub Actions
 - Use ``flask-restx`` instead of ``flask-restplus``
+- Parametrize ``wireviz_web.cli``
+- Run coverage testing on CI, with Codecov
 
 
 2021-01-06 0.0.0
