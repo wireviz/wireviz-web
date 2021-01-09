@@ -36,12 +36,13 @@ file_upload.add_argument(
 
 wireviz_blueprint = Blueprint("wireviz-web", __name__)
 api = Api(
-    wireviz_blueprint,
-    doc="/doc",
+    app=wireviz_blueprint,
     version=__version__,
     title="WireViz-Web",
     description="A wrapper around WireViz for bringing it to the web. "
     "Easily document cables and wiring harnesses.",
+    doc="/doc",
+    catch_all_404s=True,
 )
 
 ns = api.namespace("", description="WireViz-Web REST API")

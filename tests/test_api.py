@@ -106,7 +106,9 @@ class TestRenderPlantUML:
             url_for("wireviz-web._svg_render", encoded=""),
         )
         assert response.status_code == 404
-        assert b"<title>404 Not Found" in response.data
+        assert response.json["message"].startswith(
+            "The requested URL was not found on the server."
+        )
 
     def test_svg_invalid_raw_data(self, client):
         response = client.get(
@@ -138,7 +140,9 @@ class TestRenderPlantUML:
             url_for("wireviz-web._png_render", encoded=""),
         )
         assert response.status_code == 404
-        assert b"<title>404 Not Found" in response.data
+        assert response.json["message"].startswith(
+            "The requested URL was not found on the server."
+        )
 
     def test_png_invalid_raw_data(self, client):
         response = client.get(
