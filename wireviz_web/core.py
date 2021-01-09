@@ -26,6 +26,13 @@ from wireviz_web.plantuml import plantuml_decode
 
 
 def mimetype_to_type(mimetype: str) -> str:
+    """
+    Translate MIME type to image type (svg, png).
+    For unknown types, raise HTTP Not Acceptable.
+
+    :param mimetype: The MIME type string.
+    :return:         The image type string.
+    """
     if mimetype == "image/svg+xml":
         return "svg"
     elif mimetype == "image/png":
@@ -37,6 +44,14 @@ def mimetype_to_type(mimetype: str) -> str:
 
 
 def decode_plantuml(input_plantuml: str) -> str:
+    """
+    Decode PlantUML Text Encoding format.
+
+    See also: https://plantuml.com/text-encoding
+
+    :param input_plantuml: The request data, encoded with PlantUML Text Encoding format.
+    :return:               The decoded data.
+    """
     try:
         return plantuml_decode(input_plantuml)
     except Exception as ex:
@@ -46,12 +61,21 @@ def decode_plantuml(input_plantuml: str) -> str:
 
 
 def send_image(input_yaml: str, output_mimetype: str, output_filename: str) -> Response:
+    """
+    Render an image using WireViz and create a Flask Response.
 
+    :param input_yaml:      Input data in WireViz YAML format.
+    :param output_mimetype: The designated output format mimetype
+                            (either "image/svg+xml" or "image/png").
+    :param output_filename: The designated output filename.
+    :return:                A Flask Response object.
+    """
     if not input_yaml.strip():
         raise BadRequest(description="No input data")
 
     return_type = mimetype_to_type(output_mimetype)
 
+    # Render input YAML with WireViz.
     try:
         payload = wireviz.parse(yaml_input=input_yaml, return_types=return_type)
     except Exception as ex:
@@ -59,6 +83,7 @@ def send_image(input_yaml: str, output_mimetype: str, output_filename: str) -> R
             description="Unable to parse WireViz YAML format: {}".format(ex)
         )
 
+    # Respond with rendered image.
     return send_file(
         io.BytesIO(payload),
         mimetype=output_mimetype,

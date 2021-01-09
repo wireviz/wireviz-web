@@ -19,7 +19,7 @@
 from pathlib import PurePath
 
 import werkzeug
-from flask import Blueprint, request
+from flask import Blueprint, Response, request
 from flask_restx import Api, Resource, reqparse
 
 from wireviz_web import __version__
@@ -51,15 +51,30 @@ ns = api.namespace("", description="WireViz-Web REST API")
 @ns.route("/render")
 class Render(Resource):
     @api.expect(file_upload)
-    @ns.produces(["image/svg+xml", "image/png"])
-    def post(self):
-        """"""
+    @ns.produces(["image/png", "image/svg+xml"])
+    def post(self) -> Response:
+        """
+        Receive a "multipart/form-data" file upload request with filename "yml_file".
+        The "Accept" request header will determine the response image type.
 
+        Examples
+        ========
+        ::
+
+            http --form http://localhost:3005/render yml_file@test.yml Accept:image/svg+xml
+            http --form http://localhost:3005/render yml_file@test.yml Accept:image/png
+
+        :return: A Flask Response object with the rendered image.
+        """
+
+        # The designated output image mime type.
         mimetype = request.headers.get("accept")
 
+        # Read input YAML.
         args = file_upload.parse_args()
         yaml_input = args["yml_file"].read()
 
+        # Determine input- and output file names.
         input_filename = args["yml_file"].filename
         output_filename = (
             PurePath(PurePath(input_filename).stem)
@@ -67,6 +82,7 @@ class Render(Resource):
             .name
         )
 
+        # Respond with rendered image.
         return send_image(
             input_yaml=yaml_input,
             output_mimetype=mimetype,
@@ -75,11 +91,22 @@ class Render(Resource):
 
 
 @ns.route("/png/<encoded>")
-@ns.param("encoded", "encoded script like plantuml uses")
+@ns.param("encoded", "PlantUML Text Encoding format")
 class PNGRender(Resource):
     @ns.produces(["image/png"])
-    def get(self, encoded):
-        """"""
+    def get(self, encoded) -> Response:
+        """
+        Receive PlantUML Text Encoding format within URL path.
+        The URL prefix will determine the response image type.
+
+        Example
+        =======
+        ::
+
+            http http://localhost:3005/png/SyfFKj2rKt3CoKnELR1Io4ZDoSa700==
+
+        :return: A Flask Response object with the rendered image.
+        """
         yaml_input = decode_plantuml(input_plantuml=encoded)
         return send_image(
             input_yaml=yaml_input,
@@ -89,11 +116,22 @@ class PNGRender(Resource):
 
 
 @ns.route("/svg/<encoded>")
-@ns.param("encoded", "encoded script like plantuml uses")
+@ns.param("encoded", "PlantUML Text Encoding format")
 class SVGRender(Resource):
     @ns.produces(["image/sgv+xml"])
-    def get(self, encoded):
-        """"""
+    def get(self, encoded) -> Response:
+        """
+        Receive PlantUML Text Encoding format within URL path.
+        The URL prefix will determine the response image type.
+
+        Example
+        =======
+        ::
+
+            http http://localhost:3005/svg/SyfFKj2rKt3CoKnELR1Io4ZDoSa700==
+
+        :return: A Flask Response object with the rendered image.
+        """
         yaml_input = decode_plantuml(input_plantuml=encoded)
         return send_image(
             input_yaml=yaml_input,
