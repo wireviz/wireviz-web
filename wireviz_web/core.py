@@ -41,7 +41,7 @@ def decode_plantuml(input_plantuml: str) -> str:
         return plantuml_decode(input_plantuml)
     except Exception as ex:
         raise BadRequest(
-            description="Unable to parse PlantUML request format: {}".format(ex)
+            description="Unable to decode PlantUML Text Encoding format: {}".format(ex)
         )
 
 
@@ -53,7 +53,7 @@ def send_image(input_yaml: str, output_mimetype: str, output_filename: str) -> R
     return_type = mimetype_to_type(output_mimetype)
 
     try:
-        payload = wireviz.parse(input_yaml, return_types=return_type)
+        payload = wireviz.parse(yaml_input=input_yaml, return_types=return_type)
     except Exception as ex:
         raise BadRequest(
             description="Unable to parse WireViz YAML format: {}".format(ex)

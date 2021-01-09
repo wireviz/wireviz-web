@@ -114,7 +114,7 @@ class TestRenderPlantUML:
         )
         assert response.status_code == 400
         assert response.json == {
-            "message": "Unable to parse PlantUML request format: Incorrect padding",
+            "message": "Unable to decode PlantUML Text Encoding format: Incorrect padding",
         }
 
     def test_svg_invalid_encoded_data(self, client):
@@ -146,7 +146,7 @@ class TestRenderPlantUML:
         )
         assert response.status_code == 400
         assert response.json == {
-            "message": "Unable to parse PlantUML request format: Incorrect padding",
+            "message": "Unable to decode PlantUML Text Encoding format: Incorrect padding",
         }
 
     def test_png_invalid_encoded_data(self, client):
