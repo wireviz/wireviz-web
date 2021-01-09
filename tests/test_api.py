@@ -12,6 +12,10 @@ class TestRenderRegular:
         return {"yml_file": (io.BytesIO(b"Bob -> Alice : hello"), "test.yml")}
 
     @property
+    def data_empty(self):
+        return {"yml_file": (io.BytesIO(b""), "empty.yml")}
+
+    @property
     def data_invalid(self):
         return {"yml_file": (io.BytesIO(b"foobar"), "invalid.yml")}
 
@@ -68,6 +72,17 @@ class TestRenderRegular:
                 "yml_file": "YAML file Missing required parameter in an uploaded file"
             },
             "message": "Input payload validation failed",
+        }
+
+    def test_error_empty_data(self, client):
+        response = client.post(
+            url_for("wireviz-web._render"),
+            data=self.data_empty,
+            headers={"Accept": "image/svg+xml"},
+        )
+        assert response.status_code == 400
+        assert response.json == {
+            "message": "No input data",
         }
 
     def test_error_invalid_data(self, client):
