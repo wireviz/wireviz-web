@@ -24,12 +24,12 @@ Iteration 2
   - Reason: ``The import 'werkzeug.cached_property' is deprecated and will be removed in Werkzeug 1.0.``
 - [x] Add parametrization to ``cli.py`` using click
 - [x] Add badges to README
-- [o] Release version 0.1.0
+- [x] Adjust HTTP entrypoints
+- [x] Release version 0.1.0
 
 Iteration 3
 ===========
-- [o] Adjust HTTP entrypoints
-- [o] Adjust REST responses
+- [x] Adjust REST responses
 
   - 404 should respond with JSON
   - 500 should converge to 4xx
@@ -39,3 +39,16 @@ Iteration 3
 - [o] Build and publish docker images
 - [o] Cache Graphviz package on CI/GHA
   https://stackoverflow.com/questions/59269850/caching-apt-packages-in-github-actions-workflow
+
+Iteration 4
+===========
+- [o] Investigate PlantUML hex vs. brotli format
+
+    From GitLab 13.1 and later, PlantUML integration now requires a header prefix in the URL to distinguish different encoding types.
+
+  - https://docs.gitlab.com/ee/administration/integration/plantuml.html
+  - https://github.com/plantuml/plantuml/issues/117
+  - https://github.com/plantuml/plantuml/pull/370
+  - https://github.com/plantuml/plantuml-server/issues/152
+- [o] Integrate with Kroki?
+  https://github.com/yuzutech/kroki

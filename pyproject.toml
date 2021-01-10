@@ -12,7 +12,7 @@ include = [
     "LICENSE",
     "CHANGES.rst"
 ]
-homepage = "https://github.com/daq-tools/wireviz-web"
+homepage = "https://community.hiveeyes.org/t/bringing-wireviz-to-the-web/3700"
 repository = "https://github.com/daq-tools/wireviz-web"
 
 keywords = [
