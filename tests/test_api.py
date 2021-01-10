@@ -1,6 +1,7 @@
 import io
 
 import filetype
+import pytest
 from flask import Response, url_for
 
 from wireviz_web.plantuml import plantuml_encode
@@ -21,7 +22,7 @@ class TestRenderRegular:
 
     def test_svg(self, client):
         response: Response = client.post(
-            url_for("wireviz-web._render"),
+            url_for("wireviz-web._render_regular"),
             data=self.data_valid,
             headers={"Accept": "image/svg+xml"},
         )
@@ -35,7 +36,7 @@ class TestRenderRegular:
 
     def test_png(self, client):
         response = client.post(
-            url_for("wireviz-web._render"),
+            url_for("wireviz-web._render_regular"),
             data=self.data_valid,
             headers={"Accept": "image/png"},
         )
@@ -46,7 +47,7 @@ class TestRenderRegular:
 
     def test_error_no_accept(self, client):
         response = client.post(
-            url_for("wireviz-web._render"),
+            url_for("wireviz-web._render_regular"),
             data=self.data_valid,
         )
         assert response.status_code == 406
@@ -56,7 +57,7 @@ class TestRenderRegular:
 
     def test_error_empty_accept(self, client):
         response = client.post(
-            url_for("wireviz-web._render"),
+            url_for("wireviz-web._render_regular"),
             data=self.data_valid,
             headers={"Accept": ""},
         )
@@ -65,9 +66,9 @@ class TestRenderRegular:
             "message": "Output type not acceptable: ",
         }
 
-    def test_error_no_data(self, client):
+    def test_invalid_no_data(self, client):
         response = client.post(
-            url_for("wireviz-web._render"),
+            url_for("wireviz-web._render_regular"),
             headers={"Accept": "image/svg+xml"},
         )
         assert response.status_code == 400
@@ -76,9 +77,9 @@ class TestRenderRegular:
             "message": "Input payload validation failed",
         }
 
-    def test_error_empty_data(self, client):
+    def test_invalid_empty_data(self, client):
         response = client.post(
-            url_for("wireviz-web._render"),
+            url_for("wireviz-web._render_regular"),
             data=self.data_empty,
             headers={"Accept": "image/svg+xml"},
         )
@@ -87,9 +88,9 @@ class TestRenderRegular:
             "message": "No input data",
         }
 
-    def test_error_invalid_data(self, client):
+    def test_invalid_yaml_data(self, client):
         response = client.post(
-            url_for("wireviz-web._render"),
+            url_for("wireviz-web._render_regular"),
             data=self.data_invalid,
             headers={"Accept": "image/svg+xml"},
         )
@@ -110,7 +111,7 @@ class TestRenderPlantUML:
 
     def test_svg_success(self, client):
         response = client.get(
-            url_for("wireviz-web._svg_render", encoded=self.data_valid),
+            url_for("wireviz-web._render_plant_uml", imagetype="svg", encoded=self.data_valid),
         )
         assert response.status_code == 200
         assert response.headers["Content-Type"] == "image/svg+xml; charset=utf-8"
@@ -120,59 +121,37 @@ class TestRenderPlantUML:
         assert b"<svg " in response.data
         assert b"<polygon " in response.data
 
-    def test_svg_no_data(self, client):
-        response = client.get(
-            url_for("wireviz-web._svg_render", encoded=""),
-        )
-        assert response.status_code == 404
-        assert response.json["message"].startswith("The requested URL was not found on the server.")
-
-    def test_svg_invalid_raw_data(self, client):
-        response = client.get(
-            url_for("wireviz-web._svg_render", encoded="foobar"),
-        )
-        assert response.status_code == 400
-        assert response.json == {
-            "message": "Unable to decode PlantUML Text Encoding format: Incorrect padding",
-        }
-
-    def test_svg_invalid_encoded_data(self, client):
-        response = client.get(
-            url_for("wireviz-web._svg_render", encoded=self.data_invalid),
-        )
-        assert response.status_code == 400
-        assert response.json == {
-            "message": "Unable to parse WireViz YAML format: 'str' object does not support item assignment",
-        }
-
     def test_png_success(self, client):
         response = client.get(
-            url_for("wireviz-web._png_render", encoded=self.data_valid),
+            url_for("wireviz-web._render_plant_uml", imagetype="png", encoded=self.data_valid),
         )
         assert response.status_code == 200
         assert response.headers["Content-Type"] == "image/png"
         assert response.headers["Content-Disposition"] == "attachment; filename=rendered.png"
         assert filetype.guess(response.data).mime == "image/png"
 
-    def test_png_no_data(self, client):
+    @pytest.mark.parametrize("imagetype", ["png", "svg"])
+    def test_invalid_no_data(self, client, imagetype):
         response = client.get(
-            url_for("wireviz-web._png_render", encoded=""),
+            url_for("wireviz-web._render_plant_uml", imagetype=imagetype, encoded=""),
         )
         assert response.status_code == 404
         assert response.json["message"].startswith("The requested URL was not found on the server.")
 
-    def test_png_invalid_raw_data(self, client):
+    @pytest.mark.parametrize("imagetype", ["png", "svg"])
+    def test_invalid_raw_data(self, client, imagetype):
         response = client.get(
-            url_for("wireviz-web._png_render", encoded="foobar"),
+            url_for("wireviz-web._render_plant_uml", imagetype=imagetype, encoded="foobar"),
         )
         assert response.status_code == 400
         assert response.json == {
             "message": "Unable to decode PlantUML Text Encoding format: Incorrect padding",
         }
 
-    def test_png_invalid_encoded_data(self, client):
+    @pytest.mark.parametrize("imagetype", ["png", "svg"])
+    def test_invalid_encoded_data(self, client, imagetype):
         response = client.get(
-            url_for("wireviz-web._png_render", encoded=self.data_invalid),
+            url_for("wireviz-web._render_plant_uml", imagetype=imagetype, encoded=self.data_invalid),
         )
         assert response.status_code == 400
         assert response.json == {

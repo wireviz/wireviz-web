@@ -23,7 +23,8 @@ from flask import Blueprint, Response, request
 from flask_restx import Api, Resource, reqparse
 
 from wireviz_web import __version__
-from wireviz_web.core import decode_plantuml, mimetype_to_type, send_image
+from wireviz_web.core import (decode_plantuml, mimetype_to_type, send_image,
+                              type_to_mimetype)
 
 file_upload = reqparse.RequestParser()
 file_upload.add_argument(
@@ -48,7 +49,7 @@ ns = api.namespace("", description="WireViz-Web REST API")
 
 
 @ns.route("/render")
-class Render(Resource):
+class RenderRegular(Resource):
     @api.expect(file_upload)
     @ns.produces(["image/png", "image/svg+xml"])
     def post(self) -> Response:
@@ -85,51 +86,28 @@ class Render(Resource):
         )
 
 
-@ns.route("/png/<encoded>")
+@ns.route("/<imagetype>/<encoded>")
 @ns.param("encoded", "PlantUML Text Encoding format")
-class PNGRender(Resource):
-    @ns.produces(["image/png"])
-    def get(self, encoded) -> Response:
+class RenderPlantUML(Resource):
+    @ns.produces(["image/png", "image/svg+xml"])
+    def get(self, imagetype: str, encoded: str) -> Response:
         """
         Receive PlantUML Text Encoding format within URL path.
         The URL prefix will determine the response image type.
 
-        Example
-        =======
+        Examples
+        ========
         ::
 
             http http://localhost:3005/png/SyfFKj2rKt3CoKnELR1Io4ZDoSa700==
-
-        :return: A Flask Response object with the rendered image.
-        """
-        yaml_input = decode_plantuml(input_plantuml=encoded)
-        return send_image(
-            input_yaml=yaml_input,
-            output_mimetype="image/png",
-            output_filename="rendered.png",
-        )
-
-
-@ns.route("/svg/<encoded>")
-@ns.param("encoded", "PlantUML Text Encoding format")
-class SVGRender(Resource):
-    @ns.produces(["image/sgv+xml"])
-    def get(self, encoded) -> Response:
-        """
-        Receive PlantUML Text Encoding format within URL path.
-        The URL prefix will determine the response image type.
-
-        Example
-        =======
-        ::
-
             http http://localhost:3005/svg/SyfFKj2rKt3CoKnELR1Io4ZDoSa700==
 
         :return: A Flask Response object with the rendered image.
         """
+        mimetype = type_to_mimetype(imagetype)
         yaml_input = decode_plantuml(input_plantuml=encoded)
         return send_image(
             input_yaml=yaml_input,
-            output_mimetype="image/svg+xml",
-            output_filename="rendered.svg",
+            output_mimetype=mimetype,
+            output_filename="rendered.{}".format(imagetype),
         )

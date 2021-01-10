@@ -27,7 +27,7 @@ from wireviz_web.plantuml import plantuml_decode
 
 def mimetype_to_type(mimetype: str) -> str:
     """
-    Translate MIME type to image type (svg, png).
+    Translate MIME type (image/png, image/svg+xml) to image type (png, svg).
     For unknown types, raise HTTP Not Acceptable.
 
     :param mimetype: The MIME type string.
@@ -39,6 +39,22 @@ def mimetype_to_type(mimetype: str) -> str:
         return "png"
     else:
         raise NotAcceptable(description="Output type not acceptable: {}".format(mimetype))
+
+
+def type_to_mimetype(imagetype: str) -> str:
+    """
+    Translate image type (png, svg) to MIME type (image/png, image/svg+xml).
+    For unknown types, raise HTTP Not Acceptable.
+
+    :param imagetype: The MIME type string.
+    :return:         The image type string.
+    """
+    if imagetype == "svg":
+        return "image/svg+xml"
+    elif imagetype == "png":
+        return "image/png"
+    else:
+        raise NotAcceptable(description="Output type not acceptable: {}".format(imagetype))
 
 
 def decode_plantuml(input_plantuml: str) -> str:
