@@ -126,7 +126,7 @@ class TestRenderPlantUML:
     @pytest.mark.parametrize("imagetype", ["png", "svg"])
     def test_url(self, client, imagetype):
         assert url_for("wireviz-web._render_plant_uml", imagetype=imagetype, encoded=self.data_valid).startswith(
-            "/{}".format(imagetype)
+            "/plantuml/{}".format(imagetype)
         )
 
     def test_svg_success(self, client):

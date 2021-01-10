@@ -85,7 +85,7 @@ class RenderRegular(Resource):
         )
 
 
-@ns.route("/<imagetype>/<encoded>")
+@ns.route("/plantuml/<imagetype>/<encoded>")
 @ns.param("encoded", "PlantUML Text Encoding format")
 class RenderPlantUML(Resource):
     @ns.produces(["image/png", "image/svg+xml"])
