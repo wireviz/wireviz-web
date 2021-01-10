@@ -81,22 +81,24 @@ covdefaults = "^1.2.0"
 [tool.poetry.scripts]
 wireviz-web = "wireviz_web.cli:run"
 
+
 [tool.poe.tasks]
-test = "pytest tests -vvv"
-coverage = "pytest --cov=wireviz_web tests -vvv"
-style = [
-    { cmd = "black .", help = "Run black on the code base" },
-    { cmd = "isort .", help = "Run isort on the code base" },
+
+test.shell = "pytest tests -vvv"
+test.help = "Run tests"
+
+coverage.shell = "pytest --cov=wireviz_web tests -vvv"
+coverage.help = "Run coverage"
+
+style.help = "Code style: Run black and isort"
+style.sequence = [
+    { cmd = "black ." },
+    { cmd = "isort ." },
 ]
-#release = { shell = """
-#    set -e
-#    poetry version ${bump}
-#    version=$(poetry version --short)
-#    git commit pyproject.toml -m "Bump version to ${version}"
-#    git tag ${version}
-#    git push && git push --tags
-#    poetry build && poetry publish
-#""" }
+
+release.script = "release:start"
+release.help = "Cut a release and publish it"
+
 
 [tool.coverage.run]
 plugins = ["covdefaults"]
