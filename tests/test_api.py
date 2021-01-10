@@ -20,6 +20,9 @@ class TestRenderRegular:
     def data_invalid(self):
         return {"yml_file": (io.BytesIO(b"foobar"), "invalid.yml")}
 
+    def test_url(self, client):
+        assert url_for("wireviz-web._render_regular") == "/render"
+
     def test_svg(self, client):
         response: Response = client.post(
             url_for("wireviz-web._render_regular"),
@@ -120,8 +123,14 @@ class TestRenderPlantUML:
     def data_invalid(self):
         return plantuml_encode("foobar")
 
+    @pytest.mark.parametrize("imagetype", ["png", "svg"])
+    def test_url(self, client, imagetype):
+        assert url_for("wireviz-web._render_plant_uml", imagetype=imagetype, encoded=self.data_valid).startswith(
+            "/{}".format(imagetype)
+        )
+
     def test_svg_success(self, client):
-        response = client.get(
+        response: Response = client.get(
             url_for("wireviz-web._render_plant_uml", imagetype="svg", encoded=self.data_valid),
         )
         assert response.status_code == 200
