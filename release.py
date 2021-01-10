@@ -30,7 +30,7 @@ def start(bump: str):
     run(f"poetry version {bump}")
 
     # Get new version.
-    version = run("poetry version --short")
+    version = run("poetry version --short").strip()
 
     # Commit version in "pyproject.toml".
     run(f'git commit pyproject.toml -m "Bump version to {version}"')
@@ -64,5 +64,7 @@ def run(cmd, **kwargs) -> str:
             print(ex.stderr.decode("utf-8"))
         raise
 
-    outcome = stdout.decode("utf-8").strip()
+    outcome = stdout.decode("utf-8")
+    print(outcome)
+
     return outcome
