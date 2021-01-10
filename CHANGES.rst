@@ -5,6 +5,10 @@ WireViz-Web changelog
 
 in progress
 ===========
+
+
+2021-01-10 0.1.0
+================
 - Use version number from ``wireviz_web.__version__``
 - Add software tests
 - Add CI with GitHub Actions
