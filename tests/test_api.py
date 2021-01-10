@@ -1,7 +1,7 @@
 import io
 
 import filetype
-from flask import url_for
+from flask import Response, url_for
 
 from wireviz_web.plantuml import plantuml_encode
 
@@ -20,12 +20,14 @@ class TestRenderRegular:
         return {"yml_file": (io.BytesIO(b"foobar"), "invalid.yml")}
 
     def test_svg(self, client):
-        response = client.post(
+        response: Response = client.post(
             url_for("wireviz-web._render"),
             data=self.data_valid,
             headers={"Accept": "image/svg+xml"},
         )
         assert response.status_code == 200
+        assert response.headers["Content-Type"] == "image/svg+xml; charset=utf-8"
+        assert response.headers["Content-Disposition"] == "attachment; filename=test.svg"
         assert b"""<?xml version="1.0" """ in response.data
         assert b"<!DOCTYPE svg PUBLIC" in response.data
         assert b"<svg " in response.data
@@ -38,6 +40,8 @@ class TestRenderRegular:
             headers={"Accept": "image/png"},
         )
         assert response.status_code == 200
+        assert response.headers["Content-Type"] == "image/png"
+        assert response.headers["Content-Disposition"] == "attachment; filename=test.png"
         assert filetype.guess(response.data).mime == "image/png"
 
     def test_error_no_accept(self, client):
@@ -111,6 +115,8 @@ class TestRenderPlantUML:
             url_for("wireviz-web._svg_render", encoded=self.data_valid),
         )
         assert response.status_code == 200
+        assert response.headers["Content-Type"] == "image/svg+xml; charset=utf-8"
+        assert response.headers["Content-Disposition"] == "attachment; filename=rendered.svg"
         assert b"""<?xml version="1.0" """ in response.data
         assert b"<!DOCTYPE svg PUBLIC" in response.data
         assert b"<svg " in response.data
@@ -148,6 +154,8 @@ class TestRenderPlantUML:
             url_for("wireviz-web._png_render", encoded=self.data_valid),
         )
         assert response.status_code == 200
+        assert response.headers["Content-Type"] == "image/png"
+        assert response.headers["Content-Disposition"] == "attachment; filename=rendered.png"
         assert filetype.guess(response.data).mime == "image/png"
 
     def test_png_no_data(self, client):

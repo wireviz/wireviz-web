@@ -111,7 +111,7 @@ class PNGRender(Resource):
         return send_image(
             input_yaml=yaml_input,
             output_mimetype="image/png",
-            output_filename="png_rendered.svg",
+            output_filename="rendered.png",
         )
 
 
@@ -136,5 +136,5 @@ class SVGRender(Resource):
         return send_image(
             input_yaml=yaml_input,
             output_mimetype="image/svg+xml",
-            output_filename="svg_rendered.svg",
+            output_filename="rendered.svg",
         )
