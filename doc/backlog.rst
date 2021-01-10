@@ -51,4 +51,5 @@ Iteration 4
   - https://github.com/plantuml/plantuml/pull/370
   - https://github.com/plantuml/plantuml-server/issues/152
 - [o] Integrate with Kroki?
-  https://github.com/yuzutech/kroki
+  - https://github.com/yuzutech/kroki
+  - https://gitlab.com/gitlab-org/gitlab/-/issues/241744

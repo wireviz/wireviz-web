@@ -72,8 +72,8 @@ Invoke::
     http --form http://localhost:3005/render yml_file@test.yml Accept:image/png
 
     # Render a PlantUML request.
-    http http://localhost:3005/svg/SyfFKj2rKt3CoKnELR1Io4ZDoSa700==
-    http http://localhost:3005/png/SyfFKj2rKt3CoKnELR1Io4ZDoSa700==
+    http http://localhost:3005/plantuml/svg/SyfFKj2rKt3CoKnELR1Io4ZDoSa700==
+    http http://localhost:3005/plantuml/png/SyfFKj2rKt3CoKnELR1Io4ZDoSa700==
 
 .. note::
 
@@ -89,7 +89,6 @@ Invoke tests, optionally with coverage report::
 
     poe test
     poe coverage
-
 
 
 ***********
