@@ -39,8 +39,7 @@ api = Api(
     app=wireviz_blueprint,
     version=__version__,
     title="WireViz-Web",
-    description="A wrapper around WireViz for bringing it to the web. "
-    "Easily document cables and wiring harnesses.",
+    description="A wrapper around WireViz for bringing it to the web. " "Easily document cables and wiring harnesses.",
     doc="/doc",
     catch_all_404s=True,
 )
@@ -76,11 +75,7 @@ class Render(Resource):
 
         # Determine input- and output file names.
         input_filename = args["yml_file"].filename
-        output_filename = (
-            PurePath(PurePath(input_filename).stem)
-            .with_suffix("." + mimetype_to_type(mimetype))
-            .name
-        )
+        output_filename = PurePath(PurePath(input_filename).stem).with_suffix("." + mimetype_to_type(mimetype)).name
 
         # Respond with rendered image.
         return send_image(

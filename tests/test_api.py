@@ -72,9 +72,7 @@ class TestRenderRegular:
         )
         assert response.status_code == 400
         assert response.json == {
-            "errors": {
-                "yml_file": "YAML file Missing required parameter in an uploaded file"
-            },
+            "errors": {"yml_file": "YAML file Missing required parameter in an uploaded file"},
             "message": "Input payload validation failed",
         }
 
@@ -127,9 +125,7 @@ class TestRenderPlantUML:
             url_for("wireviz-web._svg_render", encoded=""),
         )
         assert response.status_code == 404
-        assert response.json["message"].startswith(
-            "The requested URL was not found on the server."
-        )
+        assert response.json["message"].startswith("The requested URL was not found on the server.")
 
     def test_svg_invalid_raw_data(self, client):
         response = client.get(
@@ -163,9 +159,7 @@ class TestRenderPlantUML:
             url_for("wireviz-web._png_render", encoded=""),
         )
         assert response.status_code == 404
-        assert response.json["message"].startswith(
-            "The requested URL was not found on the server."
-        )
+        assert response.json["message"].startswith("The requested URL was not found on the server.")
 
     def test_png_invalid_raw_data(self, client):
         response = client.get(

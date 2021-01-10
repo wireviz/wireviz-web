@@ -38,9 +38,7 @@ def mimetype_to_type(mimetype: str) -> str:
     elif mimetype == "image/png":
         return "png"
     else:
-        raise NotAcceptable(
-            description="Output type not acceptable: {}".format(mimetype)
-        )
+        raise NotAcceptable(description="Output type not acceptable: {}".format(mimetype))
 
 
 def decode_plantuml(input_plantuml: str) -> str:
@@ -55,9 +53,7 @@ def decode_plantuml(input_plantuml: str) -> str:
     try:
         return plantuml_decode(input_plantuml)
     except Exception as ex:
-        raise BadRequest(
-            description="Unable to decode PlantUML Text Encoding format: {}".format(ex)
-        )
+        raise BadRequest(description="Unable to decode PlantUML Text Encoding format: {}".format(ex))
 
 
 def send_image(input_yaml: str, output_mimetype: str, output_filename: str) -> Response:
@@ -79,9 +75,7 @@ def send_image(input_yaml: str, output_mimetype: str, output_filename: str) -> R
     try:
         payload = wireviz.parse(yaml_input=input_yaml, return_types=return_type)
     except Exception as ex:
-        raise BadRequest(
-            description="Unable to parse WireViz YAML format: {}".format(ex)
-        )
+        raise BadRequest(description="Unable to parse WireViz YAML format: {}".format(ex))
 
     # Respond with rendered image.
     return send_file(

@@ -104,6 +104,9 @@ plugins = ["covdefaults"]
 [tool.coverage.report]
 fail_under = 90
 
+[tool.black]
+line-length = 120
+
 [build-system]
 requires = ["poetry_core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"

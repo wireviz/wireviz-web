@@ -12,12 +12,8 @@ def test_cli_default(app_mock: mock.MagicMock):
     result = runner.invoke(run)
     assert result.exit_code == 0
 
-    assert (
-        mock.call().register_blueprint(mock.ANY, url_prefix="") in app_mock.mock_calls
-    )
-    assert (
-        mock.call().run(host="localhost", port=3005, debug=False) in app_mock.mock_calls
-    )
+    assert mock.call().register_blueprint(mock.ANY, url_prefix="") in app_mock.mock_calls
+    assert mock.call().run(host="localhost", port=3005, debug=False) in app_mock.mock_calls
 
 
 @mock.patch("wireviz_web.Flask", autospec=True)
@@ -27,10 +23,7 @@ def test_cli_with_url(app_mock: mock.MagicMock):
     result = runner.invoke(run, ["--url=/foobar"])
     assert result.exit_code == 0
 
-    assert (
-        mock.call().register_blueprint(mock.ANY, url_prefix="/foobar")
-        in app_mock.mock_calls
-    )
+    assert mock.call().register_blueprint(mock.ANY, url_prefix="/foobar") in app_mock.mock_calls
 
 
 @mock.patch("wireviz_web.Flask", autospec=True)
@@ -50,6 +43,4 @@ def test_cli_with_debug(app_mock: mock.MagicMock):
     result = runner.invoke(run, ["--debug"])
     assert result.exit_code == 0
 
-    assert (
-        mock.call().run(host="localhost", port=3005, debug=True) in app_mock.mock_calls
-    )
+    assert mock.call().run(host="localhost", port=3005, debug=True) in app_mock.mock_calls
