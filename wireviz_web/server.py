@@ -23,8 +23,7 @@ from flask import Blueprint, Response, request
 from flask_restx import Api, Resource, reqparse
 
 from wireviz_web import __version__
-from wireviz_web.core import (decode_plantuml, mimetype_to_type, send_image,
-                              type_to_mimetype)
+from wireviz_web.core import decode_plantuml, mimetype_to_type, send_image, type_to_mimetype
 
 file_upload = reqparse.RequestParser()
 file_upload.add_argument(
