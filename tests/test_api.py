@@ -66,6 +66,17 @@ class TestRenderRegular:
             "message": "Output type not acceptable: ",
         }
 
+    def test_error_wrong_accept(self, client):
+        response = client.post(
+            url_for("wireviz-web._render_regular"),
+            data=self.data_valid,
+            headers={"Accept": "image/jpg"},
+        )
+        assert response.status_code == 406
+        assert response.json == {
+            "message": "Output type not acceptable: image/jpg",
+        }
+
     def test_invalid_no_data(self, client):
         response = client.post(
             url_for("wireviz-web._render_regular"),
@@ -129,6 +140,22 @@ class TestRenderPlantUML:
         assert response.headers["Content-Type"] == "image/png"
         assert response.headers["Content-Disposition"] == "attachment; filename=rendered.png"
         assert filetype.guess(response.data).mime == "image/png"
+
+    def test_error_empty_imagetype(self, client):
+        response = client.get(
+            url_for("wireviz-web._render_plant_uml", imagetype="", encoded=self.data_valid),
+        )
+        assert response.status_code == 404
+        assert response.json["message"].startswith("The requested URL was not found on the server.")
+
+    def test_error_wrong_imagetype(self, client):
+        response = client.get(
+            url_for("wireviz-web._render_plant_uml", imagetype="jpeg", encoded=self.data_valid),
+        )
+        assert response.status_code == 406
+        assert response.json == {
+            "message": "Output type not acceptable: jpeg",
+        }
 
     @pytest.mark.parametrize("imagetype", ["png", "svg"])
     def test_invalid_no_data(self, client, imagetype):
