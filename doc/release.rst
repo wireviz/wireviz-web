@@ -2,11 +2,13 @@
 Release WireViz-Web
 ###################
 
-1. Format code style::
+1. Improve code style::
 
     poe style
     git commit -a "Code style"
 
-2. Bump minor version, tag repository and upload to PyPI::
+2. Update ``CHANGES.rst``.
 
-   poe release --bump=minor
+3. Bump minor version, tag repository and upload to PyPI::
+
+     poe release --bump=minor

@@ -33,7 +33,7 @@ def start(bump: str):
     version = run("poetry version --short").strip()
 
     # Commit version in "pyproject.toml".
-    run(f'git commit pyproject.toml -m "Bump version to {version}"')
+    run(f'git commit pyproject.toml CHANGES.rst -m "Bump version to {version}"')
 
     # Tag repository.
     run(f"git tag {version}")
