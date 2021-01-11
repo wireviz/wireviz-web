@@ -134,10 +134,10 @@ def send_image(input_yaml: str, output_mimetype: str, output_filename: str) -> R
             for tempfile in tempfiles:
                 try:
                     Path(tempfile).unlink(missing_ok=True)
-                except FileNotFoundError:
+                except FileNotFoundError:  # pragma: no cover
                     pass
 
-        except Exception as ex:
+        except Exception as ex:  # pragma: no cover
             message = f"Unable to produce WireViz output: {ex}"
             logger.exception(message)
             raise BadRequest(description=message)

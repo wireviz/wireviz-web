@@ -20,14 +20,14 @@ class ReversibleDict(dict):
 
     def __delitem__(self, k):
         del self.rev[self[k]]
-        del super()[k]
+        super(ReversibleDict, self).__delitem__(k)
 
     def __setitem__(self, k, v):
         try:
             del self.rev[self[k]]
         except KeyError:
             pass
-        super()[k] = v
+        super(ReversibleDict, self).__setitem__(k, v)
         self.rev[v] = k
 
     def lookup(self, v):
