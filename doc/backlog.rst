@@ -6,7 +6,7 @@ Iteration 1
 ===========
 - [x] Publish on GitHub
 - [x] Upload to PyPI as version 0.0.0
-- [o] Notify upstream authors
+- [x] Notify upstream authors
 
 Iteration 2
 ===========
@@ -33,7 +33,8 @@ Iteration 3
 
   - 404 should respond with JSON
   - 500 should converge to 4xx
-- [o] Add BOM generation endpoint
+- [x] Add BOM generation endpoint
+- [o] Should we add a straight ``POST`` endpoint instead of the fileupload one?
 - [o] Add graphical user interface
 - [o] Bring in Dockerfile again
 - [o] Build and publish docker images
