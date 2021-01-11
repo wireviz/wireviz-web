@@ -118,5 +118,5 @@ class RenderPlantUML(Resource):
         return send_image(
             input_yaml=yaml_input,
             output_mimetype=mimetype,
-            output_filename="rendered.{}".format(imagetype),
+            output_filename=f"rendered.{imagetype}",
         )

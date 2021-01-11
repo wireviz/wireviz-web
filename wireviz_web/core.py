@@ -55,7 +55,7 @@ def mimetype_to_type(mime_type: str) -> str:
     try:
         return mimetype_type_map[mime_type]
     except KeyError:
-        raise NotAcceptable(description="Output type not acceptable: {}".format(mime_type))
+        raise NotAcceptable(description=f"Output type not acceptable: {mime_type}")
 
 
 def type_to_mimetype(output_type: str) -> str:
@@ -69,7 +69,7 @@ def type_to_mimetype(output_type: str) -> str:
     try:
         return mimetype_type_map.lookup(output_type)
     except KeyError:
-        raise NotAcceptable(description="Output type not acceptable: {}".format(output_type))
+        raise NotAcceptable(description=f"Output type not acceptable: {output_type}")
 
 
 def decode_plantuml(input_plantuml: str) -> str:
@@ -84,7 +84,7 @@ def decode_plantuml(input_plantuml: str) -> str:
     try:
         return plantuml_decode(input_plantuml)
     except Exception as ex:
-        raise BadRequest(description="Unable to decode PlantUML Text Encoding format: {}".format(ex))
+        raise BadRequest(description=f"Unable to decode PlantUML Text Encoding format: {ex}")
 
 
 def send_image(input_yaml: str, output_mimetype: str, output_filename: str) -> Response:
@@ -106,7 +106,7 @@ def send_image(input_yaml: str, output_mimetype: str, output_filename: str) -> R
     try:
         harness: Harness = wireviz.parse(yaml_input=input_yaml, return_types="harness")
     except Exception as ex:
-        message = "Unable to parse WireViz YAML format: {}".format(ex)
+        message = f"Unable to parse WireViz YAML format: {ex}"
         logger.exception(message)
         raise BadRequest(description=message)
 
@@ -135,7 +135,7 @@ def send_image(input_yaml: str, output_mimetype: str, output_filename: str) -> R
                 Path(tempfile).unlink(missing_ok=True)
 
         except Exception as ex:
-            message = "Unable to produce WireViz output: {}".format(ex)
+            message = f"Unable to produce WireViz output: {ex}"
             logger.exception(message)
             raise BadRequest(description=message)
 
