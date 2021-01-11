@@ -2,6 +2,7 @@ import click
 
 from wireviz_web import create_app
 from wireviz_web.server import wireviz_blueprint
+from wireviz_web.util import setup_logging
 
 
 @click.command(
@@ -30,6 +31,9 @@ from wireviz_web.server import wireviz_blueprint
     help="Whether to run the server in debug mode",
 )
 def run(listen: str, url: str, debug: bool):
+
+    # Setup logging.
+    setup_logging()
 
     # Create Flask application.
     app = create_app()

@@ -60,8 +60,18 @@ class RenderRegular(Resource):
         ========
         ::
 
+            # Render images.
             http --form http://localhost:3005/render yml_file@test.yml Accept:image/svg+xml
             http --form http://localhost:3005/render yml_file@test.yml Accept:image/png
+
+            # Render HTML page with SVG image and BOM table.
+            http --form http://localhost:3005/render yml_file@test.yml Accept:text/html
+
+            # Render BOM in TSV format.
+            http --form http://localhost:3005/render yml_file@test.yml Accept:text/plain
+
+            # Render BOM in JSON format.
+            http --form http://localhost:3005/render yml_file@test.yml Accept:application/json
 
         :return: A Flask Response object with the rendered image.
         """

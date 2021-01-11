@@ -1,4 +1,5 @@
 import io
+from pathlib import Path
 
 import filetype
 import pytest
@@ -19,6 +20,12 @@ class TestRenderRegular:
     @property
     def data_invalid(self):
         return {"yml_file": (io.BytesIO(b"foobar"), "invalid.yml")}
+
+    @property
+    def data_demo01(self):
+        here = Path(__file__).parent
+        wireviz_yaml = open(here / "demo01.yaml", "rb").read()
+        return {"yml_file": (io.BytesIO(wireviz_yaml), "test.yml")}
 
     def test_url(self, client):
         assert url_for("wireviz-web._render_regular") == "/render"
@@ -47,6 +54,55 @@ class TestRenderRegular:
         assert response.headers["Content-Type"] == "image/png"
         assert response.headers["Content-Disposition"] == "attachment; filename=test.png"
         assert filetype.guess(response.data).mime == "image/png"
+
+    def test_html(self, client):
+        response = client.post(
+            url_for("wireviz-web._render_regular"),
+            data=self.data_valid,
+            headers={"Accept": "text/html"},
+        )
+        assert response.status_code == 200
+        assert response.headers["Content-Type"] == "text/html; charset=utf-8"
+        assert response.headers["Content-Disposition"] == "attachment; filename=test.html"
+        assert b"<!DOCTYPE html>" in response.data
+        assert b"""<meta name="generator" content="WireViz""" in response.data
+        assert b"<title>WireViz Diagram and BOM</title>" in response.data
+        assert b"<h1>Diagram</h1>" in response.data
+        assert b"<svg" in response.data
+        assert b"<h1>Bill of Materials</h1>" in response.data
+        assert b"<table" in response.data
+
+    def test_bom_text(self, client):
+        response = client.post(
+            url_for("wireviz-web._render_regular"),
+            data=self.data_demo01,
+            headers={"Accept": "text/plain"},
+        )
+        assert response.status_code == 200
+        assert response.headers["Content-Type"] == "text/plain; charset=utf-8"
+        assert response.headers["Content-Disposition"] == "attachment; filename=test.bom.txt"
+        assert (
+            response.data == b"Item\tQty\tUnit\tDesignators\n"
+            b"Connector, D-Sub, female, 9 pins\t1\t\tX1\n"
+            b"Connector, Molex KK 254, female, 3 pins\t1\t\tX2\n"
+            b"Cable, 3 x 0.25 mm\xc2\xb2 shielded\t0.2\tm\tW1\n"
+        )
+
+    def test_bom_json(self, client):
+        response = client.post(
+            url_for("wireviz-web._render_regular"),
+            data=self.data_demo01,
+            headers={"Accept": "application/json"},
+        )
+        assert response.status_code == 200
+        assert response.headers["Content-Type"] == "application/json"
+        assert response.headers["Content-Disposition"] == "attachment; filename=test.bom.json"
+        assert response.json == [
+            ["Item", "Qty", "Unit", "Designators"],
+            ["Connector, D-Sub, female, 9 pins", 1, "", "X1"],
+            ["Connector, Molex KK 254, female, 3 pins", 1, "", "X2"],
+            ["Cable, 3 x 0.25 mm² shielded", 0.2, "m", "W1"],
+        ]
 
     def test_error_no_accept(self, client):
         response = client.post(

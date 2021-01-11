@@ -17,10 +17,16 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 import io
+import json
+import logging
+from pathlib import Path
+from tempfile import NamedTemporaryFile
 
 from flask import Response, send_file
 from werkzeug.exceptions import BadRequest, NotAcceptable
 from wireviz import wireviz
+from wireviz.Harness import Harness
+from wireviz.wv_helper import tuplelist2tsv
 
 from wireviz_web.plantuml import plantuml_decode
 from wireviz_web.util import ReversibleDict
@@ -29,8 +35,13 @@ mimetype_type_map: ReversibleDict = ReversibleDict(
     {
         "image/png": "png",
         "image/svg+xml": "svg",
+        "text/html": "html",
+        "text/plain": "bom.txt",
+        "application/json": "bom.json",
     }
 )
+
+logger = logging.getLogger(__name__)
 
 
 def mimetype_to_type(mime_type: str) -> str:
@@ -91,11 +102,52 @@ def send_image(input_yaml: str, output_mimetype: str, output_filename: str) -> R
 
     return_type = mimetype_to_type(output_mimetype)
 
-    # Render input YAML with WireViz.
+    # Parse WireViz YAML.
     try:
-        payload = wireviz.parse(yaml_input=input_yaml, return_types=return_type)
+        harness: Harness = wireviz.parse(yaml_input=input_yaml, return_types="harness")
     except Exception as ex:
-        raise BadRequest(description="Unable to parse WireViz YAML format: {}".format(ex))
+        message = "Unable to parse WireViz YAML format: {}".format(ex)
+        logger.exception(message)
+        raise BadRequest(description=message)
+
+    # Dispatch rendering by designated output type.
+    if return_type == "png":
+        payload = harness.png
+
+    elif return_type == "svg":
+        payload = harness.svg
+
+    elif return_type == "html":
+        try:
+            tmpfile = NamedTemporaryFile(delete=False)
+
+            # Build list of implicitly created temporary files.
+            tempfiles = []
+            for suffix in [".gv", ".png", ".svg", ".bom.tsv", ".html"]:
+                tempfiles.append(f"{tmpfile.name}{suffix}")
+
+            # Render HTML output.
+            harness.output(filename=tmpfile.name, fmt=("png", "svg"))
+            payload = open(f"{tmpfile.name}.html", "rb").read()
+
+            # Clean up temporary files.
+            for tempfile in tempfiles:
+                Path(tempfile).unlink(missing_ok=True)
+
+        except Exception as ex:
+            message = "Unable to produce WireViz output: {}".format(ex)
+            logger.exception(message)
+            raise BadRequest(description=message)
+
+    elif return_type == "bom.txt":
+        harness.create_graph()
+        bom_list = harness.bom_list()
+        payload = tuplelist2tsv(bom_list).encode("utf-8")
+
+    elif return_type == "bom.json":
+        harness.create_graph()
+        bom_list = harness.bom_list()
+        payload = json.dumps(bom_list, indent=2).encode("utf-8")
 
     # Respond with rendered image.
     return send_file(
