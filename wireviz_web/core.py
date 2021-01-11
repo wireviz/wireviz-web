@@ -128,19 +128,21 @@ def send_image(input_yaml: str, output_mimetype: str, output_filename: str) -> R
 
             # Render HTML output.
             harness.output(filename=tmpfile.name, fmt=("png", "svg"))
-            payload = open(f"{tmpfile.name}.html", "rb").read()
+            with open(f"{tmpfile.name}.html", "rb") as f:
+                payload = f.read()
 
+        except Exception as ex:  # pragma: no cover
+            message = f"Unable to produce WireViz output: {ex}"
+            logger.exception(message)
+            raise BadRequest(description=message)
+
+        finally:
             # Clean up temporary files.
             for tempfile in tempfiles:
                 try:
                     Path(tempfile).unlink(missing_ok=True)
                 except FileNotFoundError:  # pragma: no cover
                     pass
-
-        except Exception as ex:  # pragma: no cover
-            message = f"Unable to produce WireViz output: {ex}"
-            logger.exception(message)
-            raise BadRequest(description=message)
 
     elif return_type == "bom.txt":
         harness.create_graph()
