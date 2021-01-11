@@ -23,38 +23,42 @@ from werkzeug.exceptions import BadRequest, NotAcceptable
 from wireviz import wireviz
 
 from wireviz_web.plantuml import plantuml_decode
+from wireviz_web.util import ReversibleDict
+
+mimetype_type_map: ReversibleDict = ReversibleDict(
+    {
+        "image/png": "png",
+        "image/svg+xml": "svg",
+    }
+)
 
 
-def mimetype_to_type(mimetype: str) -> str:
+def mimetype_to_type(mime_type: str) -> str:
     """
-    Translate MIME type (image/png, image/svg+xml) to image type (png, svg).
+    Translate MIME type to output type.
     For unknown types, raise HTTP Not Acceptable.
 
-    :param mimetype: The MIME type string.
-    :return:         The image type string.
+    :param mime_type: The MIME type string.
+    :return:          The image type string.
     """
-    if mimetype == "image/svg+xml":
-        return "svg"
-    elif mimetype == "image/png":
-        return "png"
-    else:
-        raise NotAcceptable(description="Output type not acceptable: {}".format(mimetype))
+    try:
+        return mimetype_type_map[mime_type]
+    except KeyError:
+        raise NotAcceptable(description="Output type not acceptable: {}".format(mime_type))
 
 
-def type_to_mimetype(imagetype: str) -> str:
+def type_to_mimetype(output_type: str) -> str:
     """
-    Translate image type (png, svg) to MIME type (image/png, image/svg+xml).
+    Translate output type to MIME type.
     For unknown types, raise HTTP Not Acceptable.
 
-    :param imagetype: The MIME type string.
-    :return:         The image type string.
+    :param output_type: The output type string.
+    :return:            The MIME type string.
     """
-    if imagetype == "svg":
-        return "image/svg+xml"
-    elif imagetype == "png":
-        return "image/png"
-    else:
-        raise NotAcceptable(description="Output type not acceptable: {}".format(imagetype))
+    try:
+        return mimetype_type_map.lookup(output_type)
+    except KeyError:
+        raise NotAcceptable(description="Output type not acceptable: {}".format(output_type))
 
 
 def decode_plantuml(input_plantuml: str) -> str:
