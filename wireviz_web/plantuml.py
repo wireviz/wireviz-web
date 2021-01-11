@@ -1,9 +1,11 @@
 """
-PlantUML_ server URL parameter encoder and decoder.
+About
+-----
+`PlantUML Text Encoding format`_ encoder and decoder for PlantUML_.
 
 Authors
 -------
-`Dyno Fu`_ and `Rudi Yardley`_
+`Dyno Fu`_ and `Rudi Yardley`_.
 
 Resources
 ---------
@@ -14,6 +16,8 @@ Resources
 
 
 .. _PlantUML: https://plantuml.com/
+.. _PlantUML Text Encoding format: https://plantuml.com/text-encoding
+
 .. _Dyno Fu: https://github.com/dyno
 .. _Rudi Yardley: https://github.com/ryardley
 """
