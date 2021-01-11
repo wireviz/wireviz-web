@@ -23,7 +23,7 @@ from flask import Blueprint, Response, request
 from flask_restx import Api, Resource, reqparse
 
 from wireviz_web import __version__
-from wireviz_web.core import decode_plantuml, mimetype_to_type, send_image, type_to_mimetype
+from wireviz_web.core import decode_plantuml, mimetype_to_type, type_to_mimetype, wireviz_render
 
 file_upload = reqparse.RequestParser()
 file_upload.add_argument(
@@ -88,7 +88,7 @@ class RenderRegular(Resource):
         output_filename = PurePath(PurePath(input_filename).stem).with_suffix("." + mimetype_to_type(mimetype)).name
 
         # Respond with rendered image.
-        return send_image(
+        return wireviz_render(
             input_yaml=yaml_input,
             output_mimetype=mimetype,
             output_filename=output_filename,
@@ -115,7 +115,7 @@ class RenderPlantUML(Resource):
         """
         mimetype = type_to_mimetype(imagetype)
         yaml_input = decode_plantuml(input_plantuml=encoded)
-        return send_image(
+        return wireviz_render(
             input_yaml=yaml_input,
             output_mimetype=mimetype,
             output_filename=f"rendered.{imagetype}",

@@ -87,19 +87,26 @@ def decode_plantuml(input_plantuml: str) -> str:
         raise BadRequest(description=f"Unable to decode PlantUML Text Encoding format: {ex}")
 
 
-def send_image(input_yaml: str, output_mimetype: str, output_filename: str) -> Response:
+def wireviz_render(input_yaml: str, output_mimetype: str, output_filename: str) -> Response:
     """
-    Render an image using WireViz and create a Flask Response.
+    Render WireViz output and create a Flask Response.
 
     :param input_yaml:      Input data in WireViz YAML format.
-    :param output_mimetype: The designated output format mimetype
-                            (either "image/svg+xml" or "image/png").
+    :param output_mimetype: The designated output format mimetype. Currently available:
+                            - image/svg+xml
+                            - image/png
+                            - text/html
+                            - text/plain
+                            - application/json
     :param output_filename: The designated output filename.
     :return:                A Flask Response object.
     """
+
+    # Sanity checks.
     if not input_yaml.strip():
         raise BadRequest(description="No input data")
 
+    # Compute output type from MIME type.
     return_type = mimetype_to_type(output_mimetype)
 
     # Parse WireViz YAML.
