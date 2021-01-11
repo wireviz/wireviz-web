@@ -66,10 +66,21 @@ Invoke::
     # Run server.
     wireviz-web
 
-    # Render a plain YAML file.
-    echo "Bob -> Alice : hello" > test.yml
-    http --form http://localhost:3005/render yml_file@test.yml Accept:image/svg+xml
-    http --form http://localhost:3005/render yml_file@test.yml Accept:image/png
+    # Acquire WireViz YAML file.
+    wget https://raw.githubusercontent.com/daq-tools/wireviz-web/main/tests/demo01.yaml
+
+    # Render images.
+    http --form http://localhost:3005/render yml_file@demo01.yaml Accept:image/svg+xml
+    http --form http://localhost:3005/render yml_file@demo01.yaml Accept:image/png
+
+    # Render HTML page with SVG image and BOM table.
+    http --form http://localhost:3005/render yml_file@demo01.yaml Accept:text/html
+
+    # Render BOM in TSV format.
+    http --form http://localhost:3005/render yml_file@demo01.yaml Accept:text/plain
+
+    # Render BOM in JSON format.
+    http --form http://localhost:3005/render yml_file@demo01.yaml Accept:application/json
 
     # Render a PlantUML request.
     http http://localhost:3005/plantuml/svg/SyfFKj2rKt3CoKnELR1Io4ZDoSa700==
