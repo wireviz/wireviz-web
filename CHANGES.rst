@@ -5,6 +5,10 @@ WireViz-Web changelog
 
 in progress
 ===========
+
+
+2021-01-11 0.2.0
+================
 - Add rendering for HTML (SVG and BOM), TEXT (BOM) and JSON (BOM)
 
 
