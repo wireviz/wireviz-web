@@ -132,7 +132,10 @@ def send_image(input_yaml: str, output_mimetype: str, output_filename: str) -> R
 
             # Clean up temporary files.
             for tempfile in tempfiles:
-                Path(tempfile).unlink(missing_ok=True)
+                try:
+                    Path(tempfile).unlink(missing_ok=True)
+                except FileNotFoundError:
+                    pass
 
         except Exception as ex:
             message = f"Unable to produce WireViz output: {ex}"
