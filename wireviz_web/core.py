@@ -148,7 +148,7 @@ def wireviz_render(input_yaml: str, output_mimetype: str, output_filename: str) 
             for tempfile in tempfiles:
                 try:
                     Path(tempfile).unlink(missing_ok=True)
-                except FileNotFoundError:  # pragma: no cover
+                except (FileNotFoundError, TypeError):  # pragma: no cover
                     pass
 
     elif return_type == "bom.txt":
