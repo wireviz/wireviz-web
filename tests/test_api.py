@@ -14,6 +14,10 @@ class TestRenderRegular:
         return {"yml_file": (io.BytesIO(b"Bob -> Alice : hello"), "test.yml")}
 
     @property
+    def data_valid_with_title(self):
+        return {"yml_file": (io.BytesIO(b"metadata:\n  title: Foobar\nBob -> Alice : hello"), "test.yml")}
+
+    @property
     def data_empty(self):
         return {"yml_file": (io.BytesIO(b""), "empty.yml")}
 
@@ -62,15 +66,26 @@ class TestRenderRegular:
             headers={"Accept": "text/html"},
         )
         assert response.status_code == 200
+
         assert response.headers["Content-Type"] == "text/html; charset=utf-8"
         assert response.headers["Content-Disposition"] == "attachment; filename=test.html"
         assert b"<!DOCTYPE html>" in response.data
         assert b"""<meta name="generator" content="WireViz""" in response.data
-        assert b"<title>wiring-42</title>" in response.data
+        assert b"<title>WireViz diagram and BOM</title>" in response.data
         assert b"<h2>Diagram</h2>" in response.data
         assert b"<svg" in response.data
         assert b"<h2>Bill of Materials</h2>" in response.data
         assert b"<table" in response.data
+
+    def test_html_with_title(self, client):
+        response = client.post(
+            url_for("wireviz-web._render_regular"),
+            data=self.data_valid_with_title,
+            headers={"Accept": "text/html"},
+        )
+        assert response.status_code == 200
+
+        assert b"<title>Foobar</title>" in response.data
 
     def test_bom_text(self, client):
         response = client.post(
