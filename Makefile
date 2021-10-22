@@ -6,3 +6,6 @@ test-coverage:
 
 format:
 	poetry run poe style
+
+release:
+	poetry run poe release --bump=$(bump)
