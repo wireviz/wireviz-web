@@ -505,7 +505,7 @@ watchdog = ["watchdog"]
 
 [[package]]
 name = "wireviz"
-version = "0.2"
+version = "0.3"
 description = "Easily document cables and wiring harnesses"
 category = "main"
 optional = false
@@ -531,7 +531,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6.2"
-content-hash = "2981bf5a4d8ef041caa5ad2ccbd8e4c7fc4c15dbb047d31ecb33869237644bd2"
+content-hash = "3ad31849a87872bcda163a9405d9ec22f1d53ead3a5a45e7b98c421bcf8cc53b"
 
 [metadata.files]
 aniso8601 = [
@@ -926,8 +926,8 @@ werkzeug = [
     {file = "Werkzeug-2.0.2.tar.gz", hash = "sha256:aa2bb6fc8dee8d6c504c0ac1e7f5f7dc5810a9903e793b6f715a9f015bdadb9a"},
 ]
 wireviz = [
-    {file = "wireviz-0.2-py3-none-any.whl", hash = "sha256:26e3814dfd14b35f039c83412dcaec95f8273e4ce7ba4a5891564b2025bc3f93"},
-    {file = "wireviz-0.2.tar.gz", hash = "sha256:d2d548e9cebdc114148c84d6137f8918b0a413ec2704ee51cda82ccf85070a6b"},
+    {file = "wireviz-0.3-py3-none-any.whl", hash = "sha256:bfb644d802fd6c3d87f7cc5691cd646d127a38635ee86e6b7bc9f1c31a699ba0"},
+    {file = "wireviz-0.3.tar.gz", hash = "sha256:d74f6d45fb199698cc2b84acd3af9a4a838ad0e412abd447b1deb744c4f1286f"},
 ]
 zipp = [
     {file = "zipp-3.6.0-py3-none-any.whl", hash = "sha256:9fe5ea21568a0a70e50f273397638d39b03353731e6cbbb3fd8502a33fec40bc"},
