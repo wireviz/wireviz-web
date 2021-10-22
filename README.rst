@@ -98,8 +98,16 @@ Tests
 *****
 Invoke tests, optionally with coverage report::
 
-    poe test
-    poe coverage
+    # Setup sandbox
+    git clone https://github.com/daq-tools/wireviz-web
+    cd wireviz-web
+    poetry install
+
+    # Run tests
+    poetry run poe test
+
+    # Run tests, with coverage
+    poetry run poe coverage
 
 
 ***********
