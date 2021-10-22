@@ -20,8 +20,9 @@ import io
 import json
 import logging
 from pathlib import Path
-from tempfile import NamedTemporaryFile, TemporaryDirectory
+from tempfile import NamedTemporaryFile
 
+import yaml
 from flask import Response, send_file
 from werkzeug.exceptions import BadRequest, NotAcceptable
 from wireviz import wireviz
@@ -112,11 +113,15 @@ def wireviz_render(input_yaml: str, output_mimetype: str, output_filename: str) 
 
     # Parse WireViz YAML.
     try:
-        # WireViz >= 0.3 needs the `file_out` parameter.
-        # This will apparently be deleted by WireViz?
-        with TemporaryDirectory() as tmpdir:
-            file_out = Path(tmpdir) / "wiring-42"
-            harness: Harness = wireviz.parse(yaml_input=input_yaml, file_out=file_out, return_types="harness")
+        # Set title, if not present.
+        default_title = "WireViz diagram and BOM"
+        yaml_data = yaml.safe_load(input_yaml)
+        if "title" not in yaml_data.get("metadata", {}):
+            yaml_data.setdefault("metadata", {})
+            yaml_data["metadata"]["title"] = default_title
+            input_yaml = yaml.dump(yaml_data)
+
+        harness: Harness = wireviz.parse(yaml_input=input_yaml, return_types="harness")
     except Exception as ex:
         message = f"Unable to parse WireViz YAML format: {ex}"
         logger.exception(message)
