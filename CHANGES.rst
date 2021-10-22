@@ -5,10 +5,14 @@ WireViz-Web changelog
 
 in progress
 ===========
+
+
+2021-10-22 0.3.0
+================
 - CI: Run test suite on Python 3.10
 - CI: Upgrade ``setup-poetry`` action. Add version pinning for Poetry 1.1.11
 - Upgrade foundation libraries Flask, Flask-RESTX and Click
-- Upgrade to WireViz 0.3
+- Upgrade to WireViz 0.3. Thanks, @formatc1702!
 
 
 2021-01-11 0.2.0
