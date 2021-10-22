@@ -30,7 +30,9 @@ jobs:
         uses: ts-graphviz/setup-graphviz@v1
 
       - name: Setup Poetry
-        uses: Gr1N/setup-poetry@v4
+        uses: Gr1N/setup-poetry@v7
+        with:
+          poetry-version: 1.1.11
 
       - name: Configure Poetry
         # https://github.com/northtree/poetry-github-actions/actions/runs/170795796/workflow
