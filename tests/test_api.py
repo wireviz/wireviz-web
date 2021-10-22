@@ -168,7 +168,7 @@ class TestRenderRegular:
         )
         assert response.status_code == 400
         assert response.json == {
-            "message": "Unable to parse WireViz YAML format: 'str' object does not support item assignment",
+            "message": "Unable to parse WireViz YAML format: 'str' object has no attribute 'get'",
         }
 
 
@@ -249,5 +249,5 @@ class TestRenderPlantUML:
         )
         assert response.status_code == 400
         assert response.json == {
-            "message": "Unable to parse WireViz YAML format: 'str' object does not support item assignment",
+            "message": "Unable to parse WireViz YAML format: 'str' object has no attribute 'get'",
         }
