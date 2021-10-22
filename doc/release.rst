@@ -11,4 +11,5 @@ Release WireViz-Web
 
 3. Bump minor version, tag repository and upload to PyPI::
 
-     poe release --bump=minor
+    poe release --bump=minor
+
