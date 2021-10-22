@@ -113,14 +113,6 @@ def wireviz_render(input_yaml: str, output_mimetype: str, output_filename: str) 
 
     # Parse WireViz YAML.
     try:
-        # Set title, if not present.
-        default_title = "WireViz diagram and BOM"
-        yaml_data = yaml.safe_load(input_yaml)
-        if "title" not in yaml_data.get("metadata", {}):
-            yaml_data.setdefault("metadata", {})
-            yaml_data["metadata"]["title"] = default_title
-            input_yaml = yaml.dump(yaml_data)
-
         harness: Harness = wireviz.parse(yaml_input=input_yaml, return_types="harness")
     except Exception as ex:
         message = f"Unable to parse WireViz YAML format: {ex}"
