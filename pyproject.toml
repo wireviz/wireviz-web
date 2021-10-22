@@ -60,7 +60,7 @@ classifiers = [
 "Issues" = "https://github.com/daq-tools/wireviz-web/issues"
 
 [tool.poetry.dependencies]
-python = "^3.6.1"
+python = "^3.6.2"
 wireviz = "^0.2"
 flask = "^1.1.2"
 flask-restx = "^0.2.0"
@@ -70,48 +70,48 @@ importlib_metadata              = { version = "^3.3.0", python = "<3.8" }
 click = "^7.1.2"
 
 [tool.poetry.dev-dependencies]
-poethepoet = "^0.9.0"
-black = "^20.8b1"
-isort = "^5.7.0"
-pytest = "^6.2.1"
-pytest-flask = "^1.1.0"
-filetype = "^1.0.7"
-pytest-cov = "^2.10.1"
-covdefaults = "^1.2.0"
+poethepoet = "^0.10.0"
+black = "^21.9b0"
+isort = "^5.9"
+pytest = "^6.2"
+pytest-flask = "^1.2"
+filetype = "^1.0.8"
+pytest-cov = "^3.0"
+covdefaults = "^1.2"
 
 [tool.poetry.scripts]
 wireviz-web = "wireviz_web.cli:run"
 
 
 [tool.poe.tasks]
+test = { shell="pytest tests -vvv", help="Run tests" }
+coverage = { shell="pytest --cov=wireviz_web tests -vvv", help="Run coverage" }
+release = { script="release:start", help="Cut a release and publish it" }
 
-test.shell = "pytest tests -vvv"
-test.help = "Run tests"
-
-coverage.shell = "pytest --cov=wireviz_web tests -vvv"
-coverage.help = "Run coverage"
-
-style.help = "Code style: Run black and isort"
-style.sequence = [
+[tool.poe.tasks.style]
+sequence = [
     { cmd = "black ." },
     { cmd = "isort ." },
 ]
-
-release.script = "release:start"
-release.help = "Cut a release and publish it"
+help = "Code style: Run black and isort"
 
 
 [tool.coverage.run]
-plugins = ["covdefaults"]
+# plugins = ["covdefaults"]
 
 [tool.coverage.report]
 fail_under = 90
+show_missing = true
+skip_covered = false
+
 
 [tool.black]
 line-length = 120
 
 [tool.isort]
+profile = "black"
 line_length = 120
+multi_line_output = 3
 
 [build-system]
 requires = ["poetry_core>=1.0.0"]
