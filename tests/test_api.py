@@ -81,12 +81,13 @@ class TestRenderRegular:
         assert response.status_code == 200
         assert response.headers["Content-Type"] == "text/plain; charset=utf-8"
         assert response.headers["Content-Disposition"] == "attachment; filename=test.bom.txt"
-        assert (
-            response.data == b"Item\tQty\tUnit\tDesignators\n"
-            b"Connector, D-Sub, female, 9 pins\t1\t\tX1\n"
-            b"Connector, Molex KK 254, female, 3 pins\t1\t\tX2\n"
-            b"Cable, 3 x 0.25 mm\xc2\xb2 shielded\t0.2\tm\tW1\n"
+        reference = (
+            b"Id\tDescription\tQty\tUnit\tDesignators\n"
+            b"1\tCable, 3 x 0.25 mm\xc2\xb2 shielded\t0.2\tm\tW1\n"
+            b"2\tConnector, D-Sub, female, 9 pins\t1\t\tX1\n"
+            b"3\tConnector, Molex KK 254, female, 3 pins\t1\t\tX2\n"
         )
+        assert reference == response.data
 
     def test_bom_json(self, client):
         response = client.post(
@@ -97,12 +98,13 @@ class TestRenderRegular:
         assert response.status_code == 200
         assert response.headers["Content-Type"] == "application/json"
         assert response.headers["Content-Disposition"] == "attachment; filename=test.bom.json"
-        assert response.json == [
-            ["Item", "Qty", "Unit", "Designators"],
-            ["Connector, D-Sub, female, 9 pins", 1, "", "X1"],
-            ["Connector, Molex KK 254, female, 3 pins", 1, "", "X2"],
-            ["Cable, 3 x 0.25 mm² shielded", 0.2, "m", "W1"],
+        reference = [
+            ["Id", "Description", "Qty", "Unit", "Designators"],
+            ["1", "Cable, 3 x 0.25 mm² shielded", "0.2", "m", "W1"],
+            ["2", "Connector, D-Sub, female, 9 pins", "1", "", "X1"],
+            ["3", "Connector, Molex KK 254, female, 3 pins", "1", "", "X2"],
         ]
+        assert reference == response.json
 
     def test_error_no_accept(self, client):
         response = client.post(
