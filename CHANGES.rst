@@ -8,6 +8,7 @@ in progress
 - CI: Run test suite on Python 3.10
 - CI: Upgrade ``setup-poetry`` action. Add version pinning for Poetry 1.1.11
 - Upgrade foundation libraries Flask, Flask-RESTX and Click
+- Upgrade to WireViz 0.3
 
 
 2021-01-11 0.2.0
