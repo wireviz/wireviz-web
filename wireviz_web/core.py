@@ -26,6 +26,7 @@ from flask import Response, send_file
 from werkzeug.exceptions import BadRequest, NotAcceptable
 from wireviz import wireviz
 from wireviz.Harness import Harness
+from wireviz.wv_bom import bom_list
 from wireviz.wv_helper import tuplelist2tsv
 
 from wireviz_web.plantuml import plantuml_decode
@@ -157,13 +158,13 @@ def wireviz_render(input_yaml: str, output_mimetype: str, output_filename: str) 
 
     elif return_type == "bom.txt":
         harness.create_graph()
-        bom_list = harness.bom_list()
-        payload = tuplelist2tsv(bom_list).encode("utf-8")
+        bomlist = bom_list(harness.bom())
+        payload = tuplelist2tsv(bomlist).encode("utf-8")
 
     elif return_type == "bom.json":
         harness.create_graph()
-        bom_list = harness.bom_list()
-        payload = json.dumps(bom_list, indent=2).encode("utf-8")
+        bomlist = bom_list(harness.bom())
+        payload = json.dumps(bomlist, indent=2).encode("utf-8")
 
     # Respond with rendered image.
     return send_file(
