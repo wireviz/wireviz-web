@@ -36,6 +36,7 @@ Iteration 3
 - [x] Add BOM generation endpoint
 - [o] Should we add a straight ``POST`` endpoint instead of the fileupload one?
 - [o] Add graphical user interface
+  - YAML Editor: https://github.com/codemirror/codemirror.next/issues/306#issuecomment-759186960
 - [o] Bring in Dockerfile again
 - [o] Build and publish docker images
 - [o] Cache Graphviz package on CI/GHA
