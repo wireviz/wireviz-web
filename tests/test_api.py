@@ -66,10 +66,10 @@ class TestRenderRegular:
         assert response.headers["Content-Disposition"] == "attachment; filename=test.html"
         assert b"<!DOCTYPE html>" in response.data
         assert b"""<meta name="generator" content="WireViz""" in response.data
-        assert b"<title>WireViz Diagram and BOM</title>" in response.data
-        assert b"<h1>Diagram</h1>" in response.data
+        assert b"<title>wiring-42</title>" in response.data
+        assert b"<h2>Diagram</h2>" in response.data
         assert b"<svg" in response.data
-        assert b"<h1>Bill of Materials</h1>" in response.data
+        assert b"<h2>Bill of Materials</h2>" in response.data
         assert b"<table" in response.data
 
     def test_bom_text(self, client):
