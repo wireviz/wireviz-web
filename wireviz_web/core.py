@@ -171,5 +171,5 @@ def wireviz_render(input_yaml: str, output_mimetype: str, output_filename: str) 
         io.BytesIO(payload),
         mimetype=output_mimetype,
         as_attachment=True,
-        attachment_filename=output_filename,
+        download_name=output_filename,
     )
