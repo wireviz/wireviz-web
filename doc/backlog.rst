@@ -34,6 +34,10 @@ Iteration 3
   - 404 should respond with JSON
   - 500 should converge to 4xx
 - [x] Add BOM generation endpoint
+
+Iteration 4
+===========
+- [o] Check if PlantUML rendering actually produces valid output
 - [o] Should we add a straight ``POST`` endpoint instead of the fileupload one?
 - [o] Add graphical user interface
   - YAML Editor: https://github.com/codemirror/codemirror.next/issues/306#issuecomment-759186960
@@ -42,7 +46,7 @@ Iteration 3
 - [o] Cache Graphviz package on CI/GHA
   https://stackoverflow.com/questions/59269850/caching-apt-packages-in-github-actions-workflow
 
-Iteration 4
+Iteration 5
 ===========
 - [o] Investigate PlantUML hex vs. brotli format
 
