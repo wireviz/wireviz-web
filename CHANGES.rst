@@ -7,6 +7,12 @@ in progress
 ===========
 
 
+2021-11-09 0.3.1
+================
+- Upgrade to WireViz 0.3.1
+- WireViz 0.3.1 makes ``wireviz.parse()``'s ``file_out`` argument optional again.
+
+
 2021-10-22 0.3.0
 ================
 - CI: Run test suite on Python 3.10
