@@ -9,15 +9,11 @@ WireViz-Web
 
 .. image:: https://img.shields.io/pypi/v/wireviz-web.svg
     :target: https://pypi.org/project/wireviz-web/
-.. image:: https://img.shields.io/github/v/tag/daq-tools/wireviz-web.svg
-    :target: https://github.com/daq-tools/wireviz-web
 .. image:: https://pepy.tech/badge/wireviz-web/month
     :target: https://pepy.tech/project/wireviz-web
 
 .. image:: https://img.shields.io/pypi/pyversions/wireviz-web.svg
     :target: https://pypi.org/project/wireviz-web/
-.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
-    :target: https://github.com/psf/black
 .. image:: https://img.shields.io/pypi/status/wireviz-web.svg
     :target: https://pypi.org/project/wireviz-web/
 .. image:: https://img.shields.io/github/license/daq-tools/wireviz-web
@@ -46,7 +42,7 @@ WireViz
 
 WireViz is a tool for easily documenting cables, wiring harnesses and connector pinouts.
 It takes plain text, YAML-formatted files as input and produces beautiful graphical output
-(SVG, PNG, ...) thanks to GraphViz_.
+(SVG, PNG, ...) thanks to Graphviz_.
 It handles automatic BOM (Bill of Materials) creation and has a lot of extra features.
 
 WireViz-Web
@@ -118,6 +114,9 @@ Every kind of contribution, feedback, or patch, is much welcome. `Create an
 issue`_ or submit a patch if you think we should include a new feature, or to
 report or fix a bug.
 
+In order to follow the general development discussion, please see `Bringing
+WireViz to the Web`_.
+
 Development
 ===========
 
@@ -138,11 +137,12 @@ License
 The project is licensed under the terms of the GNU AGPL license.
 
 
+.. _Bringing WireViz to the Web: https://community.hiveeyes.org/t/bringing-wireviz-to-the-web/3700
 .. _create an issue: https://github.com/daq-tools/wireviz-web/issues
 .. _Daniel Rojas: https://github.com/formatc1702
 .. _development sandbox: https://github.com/daq-tools/wireviz-web/blob/main/doc/sandbox.rst
 .. _Dyno Fu: https://github.com/dyno
-.. _GraphViz: https://www.graphviz.org/
+.. _Graphviz: https://www.graphviz.org/
 .. _HTTPie: https://httpie.io/
 .. _Jürgen Key: https://github.com/elbosso
 .. _PlantUML: https://plantuml.com/
