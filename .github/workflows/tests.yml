@@ -18,16 +18,17 @@ jobs:
     steps:
 
       - name: Acquire sources
-        uses: actions/checkout@v2
-
-      - name: Setup Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-          architecture: x64
+        uses: actions/checkout@v3
 
       - name: Setup Graphviz
         uses: ts-graphviz/setup-graphviz@v1
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          architecture: x64
+          cache: 'poetry'
 
       - name: Setup Poetry
         uses: Gr1N/setup-poetry@v7
@@ -41,14 +42,19 @@ jobs:
           poetry config virtualenvs.path ~/.poetry/venv
           poetry config cache-dir ~/.poetry
 
-      - name: Apply caching of dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.poetry
-          key: ${{ matrix.os }}-${{ matrix.python-version }}-poetry-${{ hashFiles('poetry.lock') }}
-
       - name: Install program
         run: poetry install
 
-      - name: Run tests
-        run: poetry run poe test
+      - name: Run tests, with coverage report
+        run: |
+          poetry run poe coverage
+          poetry run coverage xml
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./coverage.xml
+          flags: unittests
+          env_vars: OS,PYTHON
+          name: codecov-umbrella
+          fail_ci_if_error: false
