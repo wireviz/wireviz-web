@@ -1,11 +1,14 @@
-test:
+install:
+	poetry install
+
+test: install
 	poetry run poe test
 
-test-coverage:
+test-coverage: install
 	poetry run poe coverage
 
-format:
+format: install
 	poetry run poe style
 
-release:
+release: install
 	poetry run poe release --bump=$(bump)
