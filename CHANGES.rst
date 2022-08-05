@@ -6,6 +6,7 @@ WireViz-Web changelog
 in progress
 ===========
 - Update dependencies and project tooling
+- Drop support for Python 3.6
 
 
 2021-11-09 0.3.1
