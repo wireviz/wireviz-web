@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "wireviz-web"
-version = "0.3.1"
+version = "0.3.2"
 description = "A wrapper around WireViz for bringing it to the web. Easily document cables and wiring harnesses."
 authors = [
     "Jürgen Key <jkey@arcor.de>",
