@@ -5,6 +5,7 @@ WireViz-Web changelog
 
 in progress
 ===========
+- Update dependencies and project tooling
 
 
 2021-11-09 0.3.1
