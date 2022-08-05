@@ -2,10 +2,10 @@
 Release WireViz-Web
 ###################
 
-1. Improve code style::
+1. Format code::
 
     make format
-    git commit -a -m "Code style"
+    git commit -a -m "Format code"
 
 2. Update ``CHANGES.rst``::
 
