@@ -88,12 +88,12 @@ test = { shell="pytest tests -vvv", help="Run tests" }
 coverage = { shell="pytest --cov=wireviz_web tests -vvv", help="Run coverage" }
 release = { script="release:start", help="Cut a release and publish it" }
 
-[tool.poe.tasks.style]
+[tool.poe.tasks.format]
 sequence = [
     { cmd = "black ." },
     { cmd = "isort ." },
 ]
-help = "Code style: Run black and isort"
+help = "Format code with `black` and `isort`"
 
 
 [tool.coverage.run]
