@@ -62,22 +62,22 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.6.2"
 wireviz = "^0.3"
-flask = "^2.0"
-flask-restx = "^0.5.1"
+flask = "^2"
+flask-restx = "^0.5"
 
 # Conditionally installed for backward compatibility with older Python versions
 importlib_metadata              = { version = "^3.3.0", python = "<3.8" }
-click = "^8.0"
+click = "^8"
 
 [tool.poetry.dev-dependencies]
-poethepoet = "^0.10.0"
-black = "^21.9b0"
-isort = "^5.9"
-pytest = "^6.2"
-pytest-flask = "^1.2"
-filetype = "^1.0.8"
-pytest-cov = "^3.0"
-covdefaults = "^1.2"
+poethepoet = "<1"
+black = "^22"
+isort = "^5"
+pytest = "^7"
+pytest-flask = "^1"
+filetype = "^1"
+pytest-cov = "^3"
+covdefaults = "^2"
 
 [tool.poetry.scripts]
 wireviz-web = "wireviz_web.cli:run"
