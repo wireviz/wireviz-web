@@ -28,7 +28,6 @@ keywords = [
 classifiers = [
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.6",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
@@ -60,10 +59,11 @@ classifiers = [
 "Issues" = "https://github.com/daq-tools/wireviz-web/issues"
 
 [tool.poetry.dependencies]
-python = "^3.6.2"
+python = "^3.7"
 wireviz = "^0.3"
-flask = "^2"
+flask = "<2.2"
 flask-restx = "^0.5"
+werkzeug = "<2.2"
 
 # Conditionally installed for backward compatibility with older Python versions
 importlib_metadata              = { version = "^3.3.0", python = "<3.8" }
