@@ -15,35 +15,30 @@ jobs:
       OS: ${{ matrix.os }}
       PYTHON: ${{ matrix.python-version }}
     name: Python ${{ matrix.python-version }} on OS ${{ matrix.os }}
+
+    # https://github.com/actions/setup-python/issues/374#issuecomment-1088938718
     steps:
 
       - name: Acquire sources
         uses: actions/checkout@v3
 
-      - name: Setup Graphviz
+      - name: Install Graphviz
         uses: ts-graphviz/setup-graphviz@v1
 
-      - name: Setup Python
+      - name: Install Poetry
+        run: pipx install poetry==1.1.11
+
+      - name: Install Python
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
           architecture: x64
           cache: 'poetry'
 
-      - name: Setup Poetry
-        uses: Gr1N/setup-poetry@v7
-        with:
-          poetry-version: 1.1.11
-
-      - name: Configure Poetry
-        # https://github.com/northtree/poetry-github-actions/actions/runs/170795796/workflow
+      - name: Install program with dependencies
         run: |
-          poetry config virtualenvs.in-project false
-          poetry config virtualenvs.path ~/.poetry/venv
-          poetry config cache-dir ~/.poetry
-
-      - name: Install program
-        run: poetry install
+          poetry env use "${{ matrix.python-version }}"
+          poetry install --no-interaction
 
       - name: Run tests, with coverage report
         run: |
