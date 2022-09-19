@@ -14,8 +14,13 @@ try:
 except PackageNotFoundError:  # pragma: no cover
     __version__ = "unknown"
 
+import logging
+import os
 
 from flask import Flask
+from flask_cors import CORS
+
+logger = logging.getLogger(__name__)
 
 
 def create_app(test_config=None) -> Flask:
@@ -29,12 +34,16 @@ def create_app(test_config=None) -> Flask:
     :return: Configured Flask application.
     """
 
+    logger.info("Init " + __appname__)
     # Create Flask application.
     app = Flask(__name__)
 
     # Initialize Cross Origin Resource sharing support for
     # the application on all routes, for all origins and methods.
-    # CORS(app)
-    # app.config['CORS_HEADERS'] = 'Content-Type'
+    # enable cors if flag is set
+    if os.getenv("CORS_ENABLE", "False").lower() in ("true", "1", "t"):
+        CORS(app)
+        # app.config['CORS_HEADERS'] = 'Content-Type'
+        logger.info("CORS enabled for all routes")
 
     return app
