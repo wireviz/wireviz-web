@@ -9,4 +9,3 @@ services:
       - CORS_ENABLE=true
     ports: 
      - 3005:3005
-     - 5000:5000

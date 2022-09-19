@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3-slim
 
 ARG BUILD_ENV
 
@@ -21,7 +21,7 @@ COPY . .
   
 ENV FLASK_APP=wireviz_web
 
-EXPOSE 3005 5000
+EXPOSE 3005
 
 ENTRYPOINT ["python","-c","import wireviz_web.cli; wireviz_web.cli.run()"]
 CMD ["--listen","0.0.0.0:3005"]
