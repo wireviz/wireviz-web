@@ -7,6 +7,13 @@ in progress
 ===========
 
 
+2022-09-19 0.4.0
+================
+
+- Add Dockerfile support to repository. Thanks, @Jacq.
+- Add CORS support via ``CORS_ENABLE`` environment variable. Thanks, @Jacq.
+
+
 2022-08-05 0.3.2
 ================
 - Update dependencies and project tooling
