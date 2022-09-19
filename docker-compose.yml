@@ -1,0 +1,11 @@
+version: "3.5"
+
+services:
+  wireviz-web:
+    build: .
+    volumes:
+     - .:/usr/src/app
+    environment:
+      - CORS_ENABLE=true
+    ports: 
+     - 3005:3005
