@@ -5,7 +5,5 @@ services:
     build: .
     volumes:
      - .:/usr/src/app
-    environment:
-      - CORS_ENABLE=true
     ports: 
      - 3005:3005
