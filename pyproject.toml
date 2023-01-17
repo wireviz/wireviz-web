@@ -86,8 +86,8 @@ wireviz-web = "wireviz_web.cli:run"
 
 
 [tool.poe.tasks]
-test = { shell="pytest tests -vvv", help="Run tests" }
-coverage = { shell="pytest --cov=wireviz_web tests -vvv", help="Run coverage" }
+test = { shell="pytest", help="Run tests" }
+coverage = { shell="pytest --cov=wireviz_web", help="Run coverage" }
 release = { script="release:start", help="Cut a release and publish it" }
 
 [tool.poe.tasks.format]
@@ -97,6 +97,15 @@ sequence = [
 ]
 help = "Format code with `black` and `isort`"
 
+
+[tool.pytest.ini_options]
+minversion = "2.0"
+addopts = "-rsfEX -p pytester --strict-markers --verbosity=3"
+log_level = "DEBUG"
+testpaths = ["tests"]
+xfail_strict = true
+markers = [
+]
 
 [tool.coverage.run]
 # plugins = ["covdefaults"]
