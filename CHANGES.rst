@@ -6,6 +6,10 @@ WireViz-Web changelog
 in progress
 ===========
 
+
+2023-01-18 0.4.1
+================
+
 - Add support for Python 3.11
 - Update to flask-restx 1.0.5
 
