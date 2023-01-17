@@ -63,7 +63,7 @@ classifiers = [
 python = "^3.7"
 wireviz = "^0.3"
 flask = "<2.2"
-flask-restx = "^0.5"
+flask-restx = "^1.0.5"
 werkzeug = "<2.2"
 
 # Conditionally installed for backward compatibility with older Python versions
