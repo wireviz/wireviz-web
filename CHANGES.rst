@@ -7,6 +7,7 @@ in progress
 ===========
 
 - Add support for Python 3.11
+- Update to flask-restx 1.0.5
 
 
 2022-09-19 0.4.0
