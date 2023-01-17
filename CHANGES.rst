@@ -6,6 +6,8 @@ WireViz-Web changelog
 in progress
 ===========
 
+- Add support for Python 3.11
+
 
 2022-09-19 0.4.0
 ================
