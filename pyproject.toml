@@ -67,7 +67,7 @@ flask-restx = "^1.0.5"
 werkzeug = "<2.3"
 
 # Conditionally installed for backward compatibility with older Python versions
-importlib_metadata              = { version = "^3.3.0", python = "<3.8" }
+importlib_metadata              = { version = ">=3.3,<7.0", python = "<3.8" }
 click = "^8"
 Flask-Cors = "^3.0.10"
 
