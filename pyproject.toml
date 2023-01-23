@@ -78,7 +78,7 @@ isort = "^5"
 pytest = "^7"
 pytest-flask = "^1"
 filetype = "^1"
-pytest-cov = "^3"
+pytest-cov = "^4"
 covdefaults = "^2"
 
 [tool.poetry.scripts]
