@@ -73,7 +73,7 @@ Flask-Cors = "^3.0.10"
 
 [tool.poetry.dev-dependencies]
 poethepoet = "<1"
-black = "^22"
+black = "^23"
 isort = "^5"
 pytest = "^7"
 pytest-flask = "^1"
