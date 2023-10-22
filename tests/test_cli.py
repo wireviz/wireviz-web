@@ -7,7 +7,6 @@ from wireviz_web.cli import run
 
 @mock.patch("wireviz_web.Flask", autospec=True)
 def test_cli_default(app_mock: mock.MagicMock):
-
     runner = CliRunner()
     result = runner.invoke(run)
     assert result.exit_code == 0
@@ -18,7 +17,6 @@ def test_cli_default(app_mock: mock.MagicMock):
 
 @mock.patch("wireviz_web.Flask", autospec=True)
 def test_cli_with_url(app_mock: mock.MagicMock):
-
     runner = CliRunner()
     result = runner.invoke(run, ["--url=/foobar"])
     assert result.exit_code == 0
@@ -28,7 +26,6 @@ def test_cli_with_url(app_mock: mock.MagicMock):
 
 @mock.patch("wireviz_web.Flask", autospec=True)
 def test_cli_with_listen(app_mock: mock.MagicMock):
-
     runner = CliRunner()
     result = runner.invoke(run, ["--listen=foobar:1234"])
     assert result.exit_code == 0
@@ -38,7 +35,6 @@ def test_cli_with_listen(app_mock: mock.MagicMock):
 
 @mock.patch("wireviz_web.Flask", autospec=True)
 def test_cli_with_debug(app_mock: mock.MagicMock):
-
     runner = CliRunner()
     result = runner.invoke(run, ["--debug"])
     assert result.exit_code == 0
