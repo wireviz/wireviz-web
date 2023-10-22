@@ -110,13 +110,13 @@ files = [
 
 [[package]]
 name = "covdefaults"
-version = "2.2.2"
+version = "2.3.0"
 description = "A coverage plugin to provide sensible default settings"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "covdefaults-2.2.2-py2.py3-none-any.whl", hash = "sha256:10c193cbf290675961a09166d7cdea8a783655e04009f5493d50685fe6ec82f3"},
-    {file = "covdefaults-2.2.2.tar.gz", hash = "sha256:e543862ee0347769b47b27fa586d690e6b91587a3dcaaf8552fcfb1fac03d061"},
+    {file = "covdefaults-2.3.0-py2.py3-none-any.whl", hash = "sha256:2832961f6ffcfe4b57c338bc3418a3526f495c26fb9c54565409c5532f7c41be"},
+    {file = "covdefaults-2.3.0.tar.gz", hash = "sha256:4e99f679f12d792bc62e5510fa3eb59546ed47bd569e36e4fddc4081c9c3ebf7"},
 ]
 
 [package.dependencies]
