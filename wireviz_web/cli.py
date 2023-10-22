@@ -31,7 +31,6 @@ from wireviz_web.util import setup_logging
     help="Whether to run the server in debug mode",
 )
 def run(listen: str, url: str, debug: bool):
-
     # Setup logging.
     setup_logging()
 
