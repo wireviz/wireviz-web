@@ -69,7 +69,7 @@ werkzeug = "<3"
 # Conditionally installed for backward compatibility with older Python versions
 importlib_metadata              = { version = ">=3.3,<7", python = "<3.8" }
 click = "<9"
-Flask-Cors = "<4"
+Flask-Cors = "<5"
 
 [tool.poetry.dev-dependencies]
 poethepoet = "<1"
