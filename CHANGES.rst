@@ -7,6 +7,7 @@ in progress
 ===========
 
 - Add support for Python 3.12
+- Remove support for Python 3.7
 
 
 2023-01-18 0.4.1
