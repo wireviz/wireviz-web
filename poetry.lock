@@ -933,16 +933,17 @@ watchdog = ["watchdog"]
 
 [[package]]
 name = "wireviz"
-version = "0.3.2"
+version = "0.4.1"
 description = "Easily document cables and wiring harnesses"
 optional = false
 python-versions = "*"
 files = [
-    {file = "wireviz-0.3.2-py3-none-any.whl", hash = "sha256:cfff2cd0cf8638c413b84fe1c9e0a551babfa26fa43f96eb25c541a2de682104"},
-    {file = "wireviz-0.3.2.tar.gz", hash = "sha256:301817edd58eaf74a8ace2508d59511a54af2fe03b2e0fa00b55284b7ba7f6b5"},
+    {file = "wireviz-0.4.1-py3-none-any.whl", hash = "sha256:5dfdfec91e5d26e4f27f0f9d031672da7fb3c133d127167d233f4742f01873a2"},
+    {file = "wireviz-0.4.1.tar.gz", hash = "sha256:0e25ad8c2e3a269a7dd4a7f45e4e8d304db7e0432b1843a620acfa6be70570e1"},
 ]
 
 [package.dependencies]
+click = "*"
 graphviz = "*"
 pillow = "*"
 pyyaml = "*"
@@ -965,4 +966,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.7,<4"
-content-hash = "7d0ad645fe92a3ff945ecbec176bbd334d2c4ce2c7c2c776830cc5bf843eaa2f"
+content-hash = "cadebae7993f43698aae8607ded1c36e6909525cd9a2c05e0e437bdebc92f3dc"
