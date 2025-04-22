@@ -62,7 +62,7 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = ">=3.8"
-wireviz = "==0.3.2"
+wireviz = "==0.4.1"
 flask = "<2.3"
 flask-restx = "<1.4"
 werkzeug = "<4"

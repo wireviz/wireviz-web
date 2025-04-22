@@ -1090,17 +1090,18 @@ watchdog = ["watchdog (>=2.3)"]
 
 [[package]]
 name = "wireviz"
-version = "0.3.2"
+version = "0.4.1"
 description = "Easily document cables and wiring harnesses"
 optional = false
 python-versions = "*"
 groups = ["main"]
 files = [
-    {file = "wireviz-0.3.2-py3-none-any.whl", hash = "sha256:cfff2cd0cf8638c413b84fe1c9e0a551babfa26fa43f96eb25c541a2de682104"},
-    {file = "wireviz-0.3.2.tar.gz", hash = "sha256:301817edd58eaf74a8ace2508d59511a54af2fe03b2e0fa00b55284b7ba7f6b5"},
+    {file = "wireviz-0.4.1-py3-none-any.whl", hash = "sha256:5dfdfec91e5d26e4f27f0f9d031672da7fb3c133d127167d233f4742f01873a2"},
+    {file = "wireviz-0.4.1.tar.gz", hash = "sha256:0e25ad8c2e3a269a7dd4a7f45e4e8d304db7e0432b1843a620acfa6be70570e1"},
 ]
 
 [package.dependencies]
+click = "*"
 graphviz = "*"
 pillow = "*"
 pyyaml = "*"
@@ -1129,4 +1130,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.8"
-content-hash = "a04302254def3ab1e4e8b119161cc02586b32f7a1bb5cac7f4db7e33e8007c77"
+content-hash = "c55ede338d497dd776ed8635f963d70647230eb53338cdd6be6a6ca286a59087"
