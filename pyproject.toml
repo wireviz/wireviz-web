@@ -60,11 +60,12 @@ classifiers = [
 "Issues" = "https://github.com/daq-tools/wireviz-web/issues"
 
 [tool.poetry.dependencies]
-python = ">=3.7,<4"
+python = ">=3.8"
 wireviz = "==0.3.2"
 flask = "<2.3"
 flask-restx = "<1.4"
 werkzeug = "<3"
+pillow = ">=9,<12"
 
 # Conditionally installed for backward compatibility with older Python versions
 importlib_metadata              = { version = ">=3.3,<7", python = "<3.8" }
