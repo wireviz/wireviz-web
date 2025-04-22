@@ -75,7 +75,7 @@ Flask-Cors = "<6"
 
 [tool.poetry.dev-dependencies]
 poethepoet = "<1"
-black = "<24"
+black = "<25"
 isort = "<6"
 pytest = "<8"
 pytest-flask = "<2"
