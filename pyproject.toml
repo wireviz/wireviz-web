@@ -65,7 +65,7 @@ python = ">=3.8"
 wireviz = "==0.3.2"
 flask = "<2.3"
 flask-restx = "<1.4"
-werkzeug = "<3"
+werkzeug = "<4"
 pillow = ">=9,<12"
 
 # Conditionally installed for backward compatibility with older Python versions
