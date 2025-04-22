@@ -6,10 +6,12 @@ WireViz-Web changelog
 in progress
 ===========
 
-- Add support for Python 3.12
-- Remove support for Python 3.7
-- Updated to WireViz 0.4.1
+2025-04-23 0.4.2
+================
 
+- Added support for Python 3.12 and 3.13
+- Removed support for Python 3.7
+- Updated to WireViz 0.4.1
 
 2023-01-18 0.4.1
 ================
