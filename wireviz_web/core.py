@@ -112,8 +112,9 @@ def wireviz_render(input_yaml: str, output_mimetype: str, output_filename: str) 
     return_type = mimetype_to_type(output_mimetype)
 
     # Parse WireViz YAML.
+    data = yaml.safe_load(input_yaml)
     try:
-        harness: Harness = wireviz.parse(yaml_input=input_yaml, return_types="harness")
+        harness: Harness = wireviz.parse(inp=data, return_types="harness")
     except Exception as ex:
         message = f"Unable to parse WireViz YAML format: {ex}"
         logger.exception(message)
@@ -136,7 +137,7 @@ def wireviz_render(input_yaml: str, output_mimetype: str, output_filename: str) 
                 tempfiles.append(f"{tmpfile.name}{suffix}")
 
             # Render HTML output.
-            harness.output(filename=tmpfile.name, fmt=("png", "svg"))
+            harness.output(filename=tmpfile.name, fmt=("png", "svg", "html"))
             with open(f"{tmpfile.name}.html", "rb") as f:
                 payload = f.read()
 
@@ -164,6 +165,8 @@ def wireviz_render(input_yaml: str, output_mimetype: str, output_filename: str) 
         payload = json.dumps(bomlist, indent=2).encode("utf-8")
 
     # Respond with rendered image.
+    if isinstance(payload, str):
+        payload = payload.encode("utf-8")
     return send_file(
         io.BytesIO(payload),
         mimetype=output_mimetype,
