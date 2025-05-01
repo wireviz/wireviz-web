@@ -80,7 +80,7 @@ isort = "<6"
 pytest = "<8"
 pytest-flask = "<2"
 filetype = "<2"
-pytest-cov = "<5"
+pytest-cov = "<6"
 covdefaults = "<3"
 
 [tool.poetry.scripts]
