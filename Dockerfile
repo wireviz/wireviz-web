@@ -11,13 +11,10 @@ RUN pip install poetry
 
 WORKDIR /usr/src/app
 
-COPY poetry.lock pyproject.toml ./
+COPY . .
 
 RUN poetry config virtualenvs.create false \
   && poetry install --no-interaction --no-ansi --only main
-
-# TODO move this after poetry install but then pyprojet.toml packages entry cannot find wireviz_web
-COPY . .
   
 ENV FLASK_APP=wireviz_web
 
