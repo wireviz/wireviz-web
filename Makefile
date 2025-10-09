@@ -1,14 +1,14 @@
 install:
-	poetry install
+	uv pip install --editable=. --group=dev
 
 test: install
-	poetry run poe test
+	uv run poe test
 
 test-coverage: install
-	poetry run poe coverage
+	uv run poe coverage
 
 format: install
-	poetry run poe format
+	uv run poe format
 
 release: install
-	poetry run poe release --bump=$(bump)
+	uv run poe release --bump=$(bump)

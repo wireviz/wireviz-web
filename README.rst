@@ -147,7 +147,6 @@ The project is licensed under the terms of the GNU AGPL license.
 .. _Jürgen Key: https://github.com/elbosso
 .. _PlantUML: https://plantuml.com/
 .. _PlantUML Text Encoding format: https://plantuml.com/text-encoding
-.. _Poetry: https://pypi.org/project/poetry/
 .. _Rudi Yardley: https://github.com/ryardley
 .. _WireViz: https://github.com/formatc1702/WireViz
 .. _WireViz fork: https://github.com/elbosso/WireViz
