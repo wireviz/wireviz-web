@@ -73,8 +73,8 @@ include = ["wireviz_web"]
 
 [project.urls]
 Homepage = "https://community.hiveeyes.org/t/bringing-wireviz-to-the-web/3700"
-Repository = "https://github.com/daq-tools/wireviz-web"
-Issues = "https://github.com/daq-tools/wireviz-web/issues"
+Repository = "https://github.com/wireviz/wireviz-web"
+Issues = "https://github.com/wireviz/wireviz-web/issues"
 
 [project.scripts]
 wireviz-web = "wireviz_web.cli:run"

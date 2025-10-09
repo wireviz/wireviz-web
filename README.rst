@@ -2,10 +2,10 @@
 WireViz-Web
 ###########
 
-.. image:: https://github.com/daq-tools/wireviz-web/workflows/Tests/badge.svg
-    :target: https://github.com/daq-tools/wireviz-web/actions?workflow=Tests
-.. image:: https://codecov.io/gh/daq-tools/wireviz-web/branch/main/graph/badge.svg
-    :target: https://codecov.io/gh/daq-tools/wireviz-web
+.. image:: https://github.com/wireviz/wireviz-web/workflows/Tests/badge.svg
+    :target: https://github.com/wireviz/wireviz-web/actions?workflow=Tests
+.. image:: https://codecov.io/gh/wireviz/wireviz-web/branch/main/graph/badge.svg
+    :target: https://codecov.io/gh/wireviz/wireviz-web
 
 .. image:: https://img.shields.io/pypi/v/wireviz-web.svg
     :target: https://pypi.org/project/wireviz-web/
@@ -16,8 +16,8 @@ WireViz-Web
     :target: https://pypi.org/project/wireviz-web/
 .. image:: https://img.shields.io/pypi/status/wireviz-web.svg
     :target: https://pypi.org/project/wireviz-web/
-.. image:: https://img.shields.io/github/license/daq-tools/wireviz-web
-    :target: https://github.com/daq-tools/wireviz-web/blob/main/LICENSE
+.. image:: https://img.shields.io/github/license/wireviz/wireviz-web
+    :target: https://github.com/wireviz/wireviz-web/blob/main/LICENSE
 
 
 *****
@@ -76,7 +76,7 @@ Run server::
 Invoke requests::
 
     # Acquire WireViz YAML file.
-    wget https://raw.githubusercontent.com/daq-tools/wireviz-web/main/tests/demo01.yaml
+    wget https://raw.githubusercontent.com/wireviz/wireviz-web/main/tests/demo01.yaml
 
     # Render images.
     http --form http://localhost:3005/render yml_file@demo01.yaml Accept:image/svg+xml
@@ -127,8 +127,8 @@ tests succeed, you should be ready to start hacking.
 Resources
 =========
 
-- `Source code repository <https://github.com/daq-tools/wireviz-web>`_
-- `Documentation <https://github.com/daq-tools/wireviz-web/blob/main/README.rst>`_
+- `Source code repository <https://github.com/wireviz/wireviz-web>`_
+- `Documentation <https://github.com/wireviz/wireviz-web/blob/main/README.rst>`_
 - `Python Package Index (PyPI) <https://pypi.org/project/wireviz-web/>`_
 
 License
@@ -138,9 +138,9 @@ The project is licensed under the terms of the GNU AGPL license.
 
 
 .. _Bringing WireViz to the Web: https://community.hiveeyes.org/t/bringing-wireviz-to-the-web/3700
-.. _create an issue: https://github.com/daq-tools/wireviz-web/issues
+.. _create an issue: https://github.com/wireviz/wireviz-web/issues
 .. _Daniel Rojas: https://github.com/formatc1702
-.. _development sandbox: https://github.com/daq-tools/wireviz-web/blob/main/doc/sandbox.rst
+.. _development sandbox: https://github.com/wireviz/wireviz-web/blob/main/doc/sandbox.rst
 .. _Dyno Fu: https://github.com/dyno
 .. _Graphviz: https://www.graphviz.org/
 .. _HTTPie: https://httpie.io/
