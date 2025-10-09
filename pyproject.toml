@@ -87,7 +87,7 @@ dev = [
     "pytest<9",
     "pytest-flask<2",
     "filetype<2",
-    "pytest-cov<6",
+    "pytest-cov<8",
     "covdefaults<3",
 ]
 
