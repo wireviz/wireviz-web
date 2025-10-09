@@ -21,6 +21,7 @@ Resources
 .. _Dyno Fu: https://github.com/dyno
 .. _Rudi Yardley: https://github.com/ryardley
 """
+
 import base64
 import string
 import zlib
