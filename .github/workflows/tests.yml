@@ -45,7 +45,7 @@ jobs:
 
       - name: Install program with dependencies
         run: |
-          uv install .
+          uv pip install .
 
       - name: Run tests, with coverage report
         run: |
