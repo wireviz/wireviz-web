@@ -82,7 +82,7 @@ wireviz-web = "wireviz_web.cli:run"
 dev = [
     "poethepoet<1",
     "black<25",
-    "isort<6",
+    "isort<7",
     "pytest<9",
     "pytest-flask<2",
     "filetype<2",
