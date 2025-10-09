@@ -16,7 +16,7 @@ import click
     help="""
         The version label for bumping.\n
         Use either "major", "minor", "patch" or the version number.\n
-        Will be passed to `poetry version {bump}`.""",
+        Will be passed to `uv version {bump}`.""",
 )
 def start(bump: str):
     """
@@ -27,10 +27,10 @@ def start(bump: str):
     """
 
     # Bump version.
-    run(f"poetry version {bump}")
+    run(f"uv version {bump}")
 
     # Get new version.
-    version = run("poetry version --short").strip()
+    version = run("uv version --short").strip()
 
     # Commit version in "pyproject.toml".
     run(f'git commit pyproject.toml CHANGES.rst -m "Bump version to {version}"')
@@ -43,8 +43,8 @@ def start(bump: str):
     run("git push --tags")
 
     # Build wheels and publish to PyPI.
-    run("poetry build")
-    run("poetry publish")
+    run("uv build")
+    run("uv publish")
 
 
 def run(cmd, **kwargs) -> str:

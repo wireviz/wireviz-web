@@ -7,14 +7,13 @@ ENV BUILD_ENV=${BUILD_ENV}
 RUN apt update && \ 
 	apt install -y python3 graphviz
 	
-RUN pip install poetry
+RUN pip install uv
 
 WORKDIR /usr/src/app
 
 COPY . .
 
-RUN poetry config virtualenvs.create false \
-  && poetry install --no-interaction --no-ansi --only main
+RUN uv pip install .
   
 ENV FLASK_APP=wireviz_web
 

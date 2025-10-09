@@ -7,7 +7,7 @@ Sandbox installation
 Introduction
 ************
 
-The project uses the `Poetry`_ dependency and package manager.
+The project uses the `uv`_ package and project manager.
 
 
 *******
@@ -16,13 +16,16 @@ Sandbox
 
 Install prerequisites::
 
-    {apt,brew,yum,zypper} install python3 graphviz poetry
+    {apt,brew,yum,zypper} install python3 graphviz
+    pip install uv
 
 Setup development sandbox::
 
     git clone https://github.com/daq-tools/wireviz-web
     cd wireviz-web
-    poetry install
+    uv venv --python 3.13 --seed .venv
+    source .venv/bin/activate
+    uv pip install --editable=. --group=dev
 
 
 *****
@@ -32,20 +35,19 @@ Tests
 Invoke tests, optionally with coverage report::
 
     # Run tests
-    poetry run poe test
+    uv run poe test
 
     # Run tests, with coverage
-    poetry run poe coverage
+    uv run poe coverage
 
 
 ***********
 Maintenance
 ***********
 
-In order to update Poetry's lock file without upgrading dependencies, invoke::
+In order to update uv's lock file, invoke::
 
-    poetry lock --no-update
+    uv lock
 
-In order to upgrade dependencies, invoke::
 
-    poetry update
+.. _uv: https://docs.astral.sh/uv/

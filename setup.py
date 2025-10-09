@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
-# This is a shim to hopefully allow GitHub to detect the package.
-# The build is done with Poetry.
+# This is a shim to allow GitHub to detect the package
+# and build the "Dependents" list.
+# https://github.com/wireviz/wireviz-web/network/dependents
 
 import setuptools
 

@@ -33,25 +33,24 @@ jobs:
       - name: Install Graphviz
         uses: ts-graphviz/setup-graphviz@v2
 
-      - name: Install Poetry
-        run: pipx install poetry
+      - name: Install uv
+        run: pipx install uv
 
       - name: Install Python
         uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
           architecture: x64
-          cache: 'poetry'
+          cache: 'uv'
 
       - name: Install program with dependencies
         run: |
-          poetry env use "${{ matrix.python-version }}"
-          poetry install --no-interaction
+          uv install .
 
       - name: Run tests, with coverage report
         run: |
-          poetry run poe coverage
-          poetry run coverage xml
+          uv run poe coverage
+          uv run coverage xml
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
