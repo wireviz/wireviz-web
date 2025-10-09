@@ -21,7 +21,7 @@ Install prerequisites::
 
 Setup development sandbox::
 
-    git clone https://github.com/daq-tools/wireviz-web
+    git clone https://github.com/wireviz/wireviz-web
     cd wireviz-web
     uv venv --python 3.13 --seed .venv
     source .venv/bin/activate

@@ -61,7 +61,7 @@ class RenderRegular(Resource):
         ::
 
             # Acquire WireViz YAML file.
-            wget https://raw.githubusercontent.com/daq-tools/wireviz-web/main/tests/demo01.yaml
+            wget https://raw.githubusercontent.com/wireviz/wireviz-web/main/tests/demo01.yaml
 
             # Render images.
             http --form http://localhost:3005/render yml_file@demo01.yaml Accept:image/svg+xml
