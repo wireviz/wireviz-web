@@ -7,6 +7,7 @@ in progress
 ===========
 
 - Fixed Dockerfile. Thanks, @radioegor146.
+- Migrated project from Poetry to uv
 
 2025-04-23 0.4.2
 ================
