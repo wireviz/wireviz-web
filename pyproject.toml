@@ -64,7 +64,7 @@ dependencies = [
     "pillow>=9,<12",
     "importlib_metadata>=3.3,<7 ; python_version < '3.8'",
     "click<9",
-    "Flask-Cors<6",
+    "Flask-Cors<7",
 ]
 
 [tool.setuptools.packages.find]
