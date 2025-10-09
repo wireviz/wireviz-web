@@ -22,6 +22,8 @@ jobs:
     env:
       OS: ${{ matrix.os }}
       PYTHON: ${{ matrix.python-version }}
+      UV_SYSTEM_PYTHON: true
+
     name: Python ${{ matrix.python-version }} on OS ${{ matrix.os }}
 
     # https://github.com/actions/setup-python/issues/374#issuecomment-1088938718
@@ -33,15 +35,19 @@ jobs:
       - name: Install Graphviz
         uses: ts-graphviz/setup-graphviz@v2
 
-      - name: Install uv
-        run: pipx install uv
-
       - name: Install Python
         uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
-          architecture: x64
-          cache: 'uv'
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          cache-dependency-glob: |
+            pyproject.toml
+          cache-suffix: ${{ matrix.python-version }}
+          enable-cache: true
+          version: "latest"
 
       - name: Install program with dependencies
         run: |
