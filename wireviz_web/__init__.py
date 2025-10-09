@@ -1,4 +1,5 @@
 """WireViz-Web - a wrapper around WireViz for bringing it to the web. Easily document cables and wiring harnesses."""
+
 __appname__ = "wireviz-web"
 
 

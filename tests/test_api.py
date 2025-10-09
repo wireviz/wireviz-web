@@ -184,7 +184,7 @@ class TestRenderRegular:
         assert response.status_code == 400
         assert response.json == {
             "message": "Unable to parse WireViz YAML format: Expected a "
-                       "dict as top-level YAML input, but got: <class 'str'>",
+            "dict as top-level YAML input, but got: <class 'str'>",
         }
 
 
@@ -266,5 +266,5 @@ class TestRenderPlantUML:
         assert response.status_code == 400
         assert response.json == {
             "message": "Unable to parse WireViz YAML format: Expected a "
-                       "dict as top-level YAML input, but got: <class 'str'>",
+            "dict as top-level YAML input, but got: <class 'str'>",
         }
