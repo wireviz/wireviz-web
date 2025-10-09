@@ -6,6 +6,8 @@ WireViz-Web changelog
 in progress
 ===========
 
+- Fixed Dockerfile. Thanks, @radioegor146.
+
 2025-04-23 0.4.2
 ================
 
