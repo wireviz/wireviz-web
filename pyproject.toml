@@ -1,20 +1,14 @@
-[tool.poetry]
+[project]
 name = "wireviz-web"
 version = "0.4.2"
 description = "A wrapper around WireViz for bringing it to the web. Easily document cables and wiring harnesses."
 authors = [
-    "Jürgen Key <jkey@arcor.de>",
-    "Andreas Motl <andreas.motl@panodata.org>"
+    { name = "Jürgen Key", email = "jkey@arcor.de" },
+    { name = "Andreas Motl", email = "andreas.motl@panodata.org" },
 ]
-license = "AGPLv3"
+requires-python = ">=3.8"
 readme = "README.rst"
-include = [
-    "LICENSE",
-    "CHANGES.rst"
-]
-homepage = "https://community.hiveeyes.org/t/bringing-wireviz-to-the-web/3700"
-repository = "https://github.com/daq-tools/wireviz-web"
-
+license = "AGPLv3"
 keywords = [
     "cable",
     "connector",
@@ -23,7 +17,7 @@ keywords = [
     "harness",
     "wiring",
     "wiring-diagram",
-    "wiring-harness"
+    "wiring-harness",
 ]
 classifiers = [
     "Programming Language :: Python",
@@ -54,38 +48,54 @@ classifiers = [
     "Topic :: Utilities",
     "Operating System :: POSIX",
     "Operating System :: Unix",
-    "Operating System :: MacOS"
+    "Operating System :: MacOS",
+]
+dependencies = [
+    "wireviz==0.4.1",
+    "flask<3.1",
+    "flask-restx<1.4",
+    "werkzeug<4",
+    "pillow>=9,<12",
+    "importlib_metadata>=3.3,<7 ; python_version < '3.8'",
+    "click<9",
+    "Flask-Cors<6",
 ]
 
-[tool.poetry.urls]
-"Issues" = "https://github.com/daq-tools/wireviz-web/issues"
+[project.urls]
+Homepage = "https://community.hiveeyes.org/t/bringing-wireviz-to-the-web/3700"
+Repository = "https://github.com/daq-tools/wireviz-web"
+Issues = "https://github.com/daq-tools/wireviz-web/issues"
 
-[tool.poetry.dependencies]
-python = ">=3.8"
-wireviz = "==0.4.1"
-flask = "<3.1"
-flask-restx = "<1.4"
-werkzeug = "<4"
-pillow = ">=9,<12"
-
-# Conditionally installed for backward compatibility with older Python versions
-importlib_metadata              = { version = ">=3.3,<7", python = "<3.8" }
-click = "<9"
-Flask-Cors = "<6"
-
-[tool.poetry.dev-dependencies]
-poethepoet = "<1"
-black = "<25"
-isort = "<6"
-pytest = "<9"
-pytest-flask = "<2"
-filetype = "<2"
-pytest-cov = "<6"
-covdefaults = "<3"
-
-[tool.poetry.scripts]
+[project.scripts]
 wireviz-web = "wireviz_web.cli:run"
 
+[dependency-groups]
+dev = [
+    "poethepoet<1",
+    "black<25",
+    "isort<6",
+    "pytest<9",
+    "pytest-flask<2",
+    "filetype<2",
+    "pytest-cov<6",
+    "covdefaults<3",
+]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "LICENSE",
+    "CHANGES.rst",
+]
+
+[tool.hatch.build.targets.wheel]
+include = [
+    "LICENSE",
+    "CHANGES.rst",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [tool.poe.tasks]
 test = { shell="pytest", help="Run tests" }
@@ -99,7 +109,6 @@ sequence = [
 ]
 help = "Format code with `black` and `isort`"
 
-
 [tool.pytest.ini_options]
 minversion = "2.0"
 addopts = "-rsfEX -p pytester --strict-markers --verbosity=3"
@@ -110,13 +119,11 @@ markers = [
 ]
 
 [tool.coverage.run]
-# plugins = ["covdefaults"]
 
 [tool.coverage.report]
 fail_under = 90
 show_missing = true
 skip_covered = false
-
 
 [tool.black]
 line-length = 120
@@ -125,7 +132,3 @@ line-length = 120
 profile = "black"
 line_length = 120
 multi_line_output = 3
-
-[build-system]
-requires = ["poetry_core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
