@@ -82,7 +82,7 @@ wireviz-web = "wireviz_web.cli:run"
 [dependency-groups]
 dev = [
     "poethepoet<1",
-    "black<25",
+    "black<26",
     "isort<7",
     "pytest<9",
     "pytest-flask<2",
