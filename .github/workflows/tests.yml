@@ -32,7 +32,7 @@ jobs:
     steps:
 
       - name: Acquire sources
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Install Graphviz
         uses: ts-graphviz/setup-graphviz@v2
