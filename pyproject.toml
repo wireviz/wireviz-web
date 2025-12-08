@@ -7,7 +7,7 @@ requires = [
 
 [project]
 name = "wireviz-web"
-version = "0.4.2"
+dynamic = ["version"]
 description = "A wrapper around WireViz for bringing it to the web. Easily document cables and wiring harnesses."
 authors = [
     { name = "Jürgen Key", email = "jkey@arcor.de" },
@@ -115,11 +115,14 @@ profile = "black"
 line_length = 120
 multi_line_output = 3
 
+[tool.versioningit.vcs]
+method = "git-archive"
+default-tag = "0.0.0"
+describe-subst = "$Format:%(describe:tags,match=*)$"
 
 [tool.poe.tasks]
 test = { shell="pytest", help="Run tests" }
 coverage = { shell="pytest --cov=wireviz_web", help="Run coverage" }
-release = { script="release:start", help="Cut a release and publish it" }
 
 [tool.poe.tasks.format]
 sequence = [
@@ -127,4 +130,3 @@ sequence = [
     { cmd = "isort ." },
 ]
 help = "Format code with `black` and `isort`"
-

@@ -11,7 +11,9 @@ Release WireViz-Web
 
     git commit -a -m "Update changelog"
 
-3. Bump minor version, tag repository and upload to PyPI::
+3. Tag repository, push to remote, and upload to PyPI::
 
-    make release bump=minor
-
+    git tag 0.4.2
+    git push && git push --tags
+    python -m build
+    twine upload dist/*
