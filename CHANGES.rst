@@ -8,6 +8,7 @@ in progress
 
 - Fixed Dockerfile. Thanks, @radioegor146.
 - Migrated project from Poetry to uv
+- Started publishing OCI images to GHCR
 
 2025-04-23 0.4.2
 ================

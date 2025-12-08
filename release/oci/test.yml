@@ -1,0 +1,7 @@
+services:
+  sut:
+    build:
+      context: ../..
+      dockerfile: release/oci/Dockerfile
+    entrypoint: ""
+    command: selftest.sh

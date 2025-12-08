@@ -10,6 +10,11 @@ updates:
     schedule:
       interval: "daily"
 
+  - package-ecosystem: "docker"
+    directory: "/release/oci"
+    schedule:
+      interval: "weekly"
+
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
