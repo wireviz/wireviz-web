@@ -53,7 +53,7 @@ jobs:
 
       - name: Install program with dependencies
         run: |
-          uv pip install .
+          uv pip install --upgrade .
 
       - name: Run tests, with coverage report
         run: |

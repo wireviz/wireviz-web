@@ -889,7 +889,6 @@ wheels = [
 
 [[package]]
 name = "wireviz-web"
-version = "0.4.2"
 source = { editable = "." }
 dependencies = [
     { name = "click" },
@@ -916,24 +915,24 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "click", specifier = "<9" },
-    { name = "flask", specifier = "<3.1" },
-    { name = "flask-cors", specifier = "<6" },
+    { name = "flask", specifier = "<3.2" },
+    { name = "flask-cors", specifier = "<7" },
     { name = "flask-restx", specifier = "<1.4" },
     { name = "importlib-metadata", marker = "python_full_version < '3.8'", specifier = ">=3.3,<7" },
-    { name = "pillow", specifier = ">=9,<12" },
+    { name = "pillow", specifier = ">=10,<13" },
     { name = "werkzeug", specifier = "<4" },
     { name = "wireviz", specifier = "==0.4.1" },
 ]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "black", specifier = "<25" },
+    { name = "black", specifier = "<26" },
     { name = "covdefaults", specifier = "<3" },
     { name = "filetype", specifier = "<2" },
-    { name = "isort", specifier = "<6" },
+    { name = "isort", specifier = "<7" },
     { name = "poethepoet", specifier = "<1" },
     { name = "pytest", specifier = "<9" },
-    { name = "pytest-cov", specifier = "<6" },
+    { name = "pytest-cov", specifier = "<8" },
     { name = "pytest-flask", specifier = "<2" },
 ]
 
