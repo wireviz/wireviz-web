@@ -9,6 +9,7 @@ from wireviz_web.util import setup_logging
     help="""A wrapper around WireViz for bringing it to the web. 
     Easily document cables and wiring harnesses."""
 )
+@click.version_option()
 @click.option(
     "--listen",
     type=str,

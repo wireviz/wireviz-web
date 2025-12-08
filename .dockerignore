@@ -4,5 +4,6 @@
 !CHANGES.rst
 !LICENSE
 !pyproject.toml
+!release/*
 !README.rst
 !uv.lock
