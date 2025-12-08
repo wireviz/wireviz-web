@@ -9,6 +9,3 @@ test-coverage: install
 
 format: install
 	uv run poe format
-
-release: install
-	uv run poe release --bump=$(bump)
