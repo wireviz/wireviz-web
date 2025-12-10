@@ -59,4 +59,3 @@ ENV PATH=/root/.local/bin:$PATH
 ENV FLASK_APP=wireviz_web
 EXPOSE 3005
 ENTRYPOINT ["wireviz-web"]
-CMD ["--listen", "0.0.0.0:3005"]
