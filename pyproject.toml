@@ -64,6 +64,7 @@ dependencies = [
     "werkzeug<4",
     "pillow>=10,<13",
     "pillow>=12,<13 ; python_version >= '3.14'",
+    "rpds-py>=0.25.0",
     "importlib_metadata>=3.3,<7 ; python_version < '3.8'",
     "click<9",
     "Flask-Cors<7",
