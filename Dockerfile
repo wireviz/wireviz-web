@@ -11,20 +11,17 @@ ENV UV_LINK_MODE=copy
 ENV UV_PYTHON_DOWNLOADS=never
 ENV UV_SYSTEM_PYTHON=true
 
-RUN apt update && \ 
-	apt install -y python3 graphviz
-	
+RUN apt-get update && \
+	apt-get install --yes python3 graphviz git
+
 RUN pip install uv
 
 WORKDIR /usr/src/app
 
 COPY . .
 
-RUN uv pip install .
-  
+RUN uv pip install --upgrade .
+
 ENV FLASK_APP=wireviz_web
-
+ENTRYPOINT ["wireviz-web"]
 EXPOSE 3005
-
-ENTRYPOINT ["python","-c","import wireviz_web.cli; wireviz_web.cli.run()"]
-CMD ["--listen","0.0.0.0:3005"]
