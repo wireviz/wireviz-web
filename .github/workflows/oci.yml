@@ -3,8 +3,8 @@ name: OCI
 
 on:
   push:
-    tags:
-      - '*.*.*'
+    branches: ['main']
+    tags: ['*.*.*']
   pull_request:
 
   schedule:
@@ -87,6 +87,7 @@ jobs:
             ghcr.io/${{ env.IMAGE_NAME }}
           # Generate OCI image tags based on the following events/attributes
           tags: |
+            type=edge,branch=main
             type=schedule,pattern=nightly
             type=ref,event=pr
             type=semver,pattern={{version}}
