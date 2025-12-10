@@ -12,7 +12,7 @@ ENV UV_PYTHON_DOWNLOADS=never
 ENV UV_SYSTEM_PYTHON=true
 
 RUN apt update && \ 
-	apt install -y python3 graphviz
+	apt install -y python3 graphviz git
 	
 RUN pip install uv
 
