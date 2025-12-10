@@ -13,7 +13,7 @@ authors = [
     { name = "Jürgen Key", email = "jkey@arcor.de" },
     { name = "Andreas Motl", email = "andreas.motl@panodata.org" },
 ]
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 readme = "README.rst"
 license = "AGPL-3.0"
 keywords = [
@@ -29,7 +29,6 @@ keywords = [
 classifiers = [
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
