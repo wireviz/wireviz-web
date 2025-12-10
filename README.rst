@@ -66,7 +66,7 @@ Install package::
 
 Use Docker or Podman::
 
-    docker run --rm --publish 3005:3005 ghcr.io/wireviz/wireviz-web:latest --listen 0.0.0.0:3005
+    docker run --rm --publish 3005:3005 ghcr.io/wireviz/wireviz-web:latest wireviz-web --listen 0.0.0.0:3005
 
 *****
 Usage
