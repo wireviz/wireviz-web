@@ -1,7 +1,7 @@
 import click
 
 from wireviz_web import create_app
-from wireviz_web.server import wireviz_blueprint
+from wireviz_web.server import app as wireviz_web_app
 from wireviz_web.util import setup_logging
 
 
@@ -39,7 +39,7 @@ def run(listen: str, url: str, debug: bool):
     app = create_app()
 
     # Register WireViz-Web component.
-    app.register_blueprint(wireviz_blueprint, url_prefix=url)
+    app.register_blueprint(wireviz_web_app, url_prefix=url)
 
     # Invoke Flask application.
     host, port = listen.split(":")

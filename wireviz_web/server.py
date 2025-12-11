@@ -34,9 +34,9 @@ file_upload.add_argument(
     help="YAML file",
 )
 
-wireviz_blueprint = Blueprint("wireviz-web", __name__)
+app = Blueprint("wireviz-web", __name__)
 api = Api(
-    app=wireviz_blueprint,
+    app=app,
     version=__version__,
     title="WireViz-Web",
     description="A wrapper around WireViz for bringing it to the web. " "Easily document cables and wiring harnesses.",
