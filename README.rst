@@ -64,6 +64,10 @@ Install package::
 
     pip install wireviz-web
 
+*********
+Container
+*********
+
 Use Docker or Podman::
 
     docker run --rm --publish 3005:3005 ghcr.io/wireviz/wireviz-web:latest --listen 0.0.0.0:3005
@@ -76,17 +80,21 @@ Run server::
 
     wireviz-web
 
+Run server, listening on all interfaces::
+
+    wireviz-web --listen=0.0.0.0:3005
+
 Invoke requests::
 
     # Acquire WireViz YAML file.
     wget https://raw.githubusercontent.com/wireviz/wireviz-web/main/tests/demo01.yaml
 
+    # Render HTML page with SVG image and BOM table.
+    http --form http://localhost:3005/render yml_file@demo01.yaml Accept:text/html
+
     # Render images.
     http --form http://localhost:3005/render yml_file@demo01.yaml Accept:image/svg+xml
     http --form http://localhost:3005/render yml_file@demo01.yaml Accept:image/png
-
-    # Render HTML page with SVG image and BOM table.
-    http --form http://localhost:3005/render yml_file@demo01.yaml Accept:text/html
 
     # Render BOM in TSV format.
     http --form http://localhost:3005/render yml_file@demo01.yaml Accept:text/plain
