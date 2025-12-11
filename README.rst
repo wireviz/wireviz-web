@@ -23,6 +23,7 @@ WireViz-Web
 *****
 About
 *****
+
 WireViz-Web is a wrapper around the excellent WireViz_ by `Daniel Rojas`_
 for bringing it to the web.
 
@@ -71,6 +72,22 @@ Container
 Use Docker or Podman::
 
     docker run --rm --publish 3005:3005 ghcr.io/wireviz/wireviz-web:latest --listen 0.0.0.0:3005
+
+Use Docker Compose or Podman Compose:
+
+.. code:: yaml
+
+    services:
+      wireviz-web:
+        image: ghcr.io/wireviz/wireviz-web:latest
+        environment:
+          WIREVIZ_LISTEN: 0.0.0.0:3005
+        ports:
+          - "3005:3005"
+        healthcheck:
+          test: [ "CMD", "curl", "--fail", "http://localhost:3005/status" ]
+          start_period: 2s
+          interval: 10s
 
 *****
 Usage

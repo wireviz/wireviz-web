@@ -47,6 +47,11 @@ api = Api(
 ns = api.namespace("", description="WireViz-Web REST API")
 
 
+@app.route("/status")
+def status():
+    return "OK"
+
+
 @ns.route("/render")
 class RenderRegular(Resource):
     @api.expect(file_upload)
