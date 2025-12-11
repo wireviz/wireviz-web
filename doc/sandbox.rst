@@ -49,5 +49,13 @@ In order to update uv's lock file, invoke::
 
     uv lock
 
+***
+OCI
+***
+
+Build OCI release image for local consumption::
+
+    docker build -t wireviz-web:local -f release/oci/Dockerfile .
+
 
 .. _uv: https://docs.astral.sh/uv/

@@ -34,6 +34,13 @@ class TestRenderRegular:
     def test_url(self, client):
         assert url_for("wireviz-web._render_regular") == "/render"
 
+    def test_status(self, client):
+        response: Response = client.get(
+            url_for("wireviz-web.status"),
+        )
+        assert response.status_code == 200
+        assert b"OK" == response.data
+
     def test_svg(self, client):
         response: Response = client.post(
             url_for("wireviz-web._render_regular"),
