@@ -7,14 +7,17 @@ in progress
 ===========
 
 - Fixed Dockerfile. Thanks, @radioegor146.
-- Migrated project from Poetry to uv
-- Started publishing OCI images to GHCR
+- Migrated project from Poetry to uv. Thanks, @julled.
+- Started publishing OCI images to GHCR. Thanks, @julled.
+- Started permitting the installation of Pillow 12.
+- Added support for Python 3.14
+- Dropped support for Python 3.8
 
 2025-04-23 0.4.2
 ================
 
 - Added support for Python 3.12 and 3.13
-- Removed support for Python 3.7
+- Dropped support for Python 3.7
 - Updated to WireViz 0.4.1
 
 2023-01-18 0.4.1
@@ -34,7 +37,7 @@ in progress
 2022-08-05 0.3.2
 ================
 - Update dependencies and project tooling
-- Drop support for Python 3.6
+- Dropped support for Python 3.6
 
 
 2021-11-09 0.3.1
