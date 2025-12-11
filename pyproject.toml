@@ -94,19 +94,30 @@ dev = [
 
 [tool.pytest.ini_options]
 minversion = "2.0"
-addopts = "-rsfEX -p pytester --strict-markers --verbosity=3"
+addopts = """
+    -rsfEX -p pytester --strict-markers --verbosity=3
+    --cov --cov-report=term-missing --cov-report=xml
+"""
 log_level = "DEBUG"
+log_cli_level = "DEBUG"
 testpaths = ["tests"]
 xfail_strict = true
 markers = [
 ]
 
+
 [tool.coverage.run]
+branch = false
+omit = [
+  "tests/*",
+]
+source = [ "wireviz_web" ]
 
 [tool.coverage.report]
 fail_under = 90
 show_missing = true
 skip_covered = false
+
 
 [tool.black]
 line-length = 120
@@ -122,6 +133,9 @@ default-tag = "0.0.0"
 describe-subst = "$Format:%(describe:tags,match=*)$"
 
 [tool.poe.tasks]
+check = [
+    "test",
+]
 test = { shell="pytest", help="Run tests" }
 coverage = { shell="pytest --cov=wireviz_web", help="Run coverage" }
 
