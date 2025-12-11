@@ -6,6 +6,9 @@ WireViz-Web changelog
 in progress
 ===========
 
+2025-12-11 0.4.3
+================
+
 - Made the CLI accept environment variables for configuration,
   like ``WIREVIZ_LISTEN``, ``WIREVIZ_URL``, ``WIREVIZ_DEBUG``.
 - Fixed Dockerfile. Thanks, @radioegor146.
