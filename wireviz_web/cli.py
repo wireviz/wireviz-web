@@ -12,6 +12,7 @@ from wireviz_web.util import setup_logging
 @click.version_option()
 @click.option(
     "--listen",
+    envvar="WIREVIZ_LISTEN",
     type=str,
     required=False,
     default="localhost:3005",
@@ -19,6 +20,7 @@ from wireviz_web.util import setup_logging
 )
 @click.option(
     "--url",
+    envvar="WIREVIZ_URL",
     type=str,
     required=False,
     default="",
@@ -26,6 +28,7 @@ from wireviz_web.util import setup_logging
 )
 @click.option(
     "--debug",
+    envvar="WIREVIZ_DEBUG",
     is_flag=True,
     required=False,
     default=False,
