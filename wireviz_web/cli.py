@@ -15,14 +15,14 @@ from wireviz_web.util import setup_logging
     type=str,
     required=False,
     default="localhost:3005",
-    help="The address the server should listen on." "Defaults to: localhost:3005",
+    help="The address the server should listen on. Defaults to: localhost:3005",
 )
 @click.option(
     "--url",
     type=str,
     required=False,
     default="",
-    help="On wich URL prefix to respond." "Defaults to: /",
+    help="On which URL prefix to respond. Defaults to: /",
 )
 @click.option(
     "--debug",
