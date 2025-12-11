@@ -1,6 +1,9 @@
+# This Dockerfile is meant for release build purposes.
+# https://github.com/wireviz/wireviz-web
+
 # syntax=docker/dockerfile:1
 
-# Use BuildKit's build-time cache mounts, it makes a huge difference on rebuilds.
+# The recipe uses BuildKit's build-time cache mounts, which makes a huge difference on rebuilds.
 # - https://vsupalov.com/buildkit-cache-mount-dockerfile/
 # - https://github.com/FernandoMiguel/Buildkit#mounttypecache
 

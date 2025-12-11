@@ -1,3 +1,6 @@
+# This Dockerfile is meant for development purposes.
+# https://github.com/wireviz/wireviz-web
+
 FROM python:3-slim
 
 ARG BUILD_ENV
