@@ -15,5 +15,6 @@ Release WireViz-Web
 
     git tag 0.4.2
     git push && git push --tags
+    uv pip install build twine
     python -m build
     twine upload dist/*
