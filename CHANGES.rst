@@ -6,6 +6,8 @@ WireViz-Web changelog
 in progress
 ===========
 
+- Made the CLI accept environment variables for configuration,
+  like ``WIREVIZ_LISTEN``, ``WIREVIZ_URL``, ``WIREVIZ_DEBUG``.
 - Fixed Dockerfile. Thanks, @radioegor146.
 - Migrated project from Poetry to uv. Thanks, @julled.
 - Started publishing OCI images to GHCR. Thanks, @julled.
